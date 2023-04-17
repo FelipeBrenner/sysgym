@@ -1,0 +1,39 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["prettier", "@typescript-eslint"],
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "ts-react-important-stuff"
+  ],
+  "rules": {
+    "prettier/prettier": ["error"],
+    "max-params": ["warn", 3],
+    "prefer-destructuring": [
+      "error",
+      {
+        "array": true,
+        "object": true
+      },
+      {
+        "enforceForRenamedProperties": false
+      }
+    ],
+    "@typescript-eslint/ban-types": [
+      "error",
+      {
+        "types": {
+          "React.FC": {
+            "message": "Please don't use React.FC instead.",
+            "fixWith": "Prefer explicit definition children, like ReactNode or PropsWithChildren interface"
+          },
+          "React.FunctionalComponent": {
+            "message": "Please use React.FunctionalComponent instead.",
+            "fixWith": "Prefer explicit definition children, like ReactNode or PropsWithChildren interface"
+          }
+        }
+      }
+    ]
+  }
+}
