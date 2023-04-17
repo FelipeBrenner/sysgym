@@ -35,7 +35,7 @@ export const FirebaseLogin = () => {
 
         if (isMounted()) {
           const returnUrl =
-            (router.query.returnUrl as string | undefined) || "/dashboard";
+            (router.query.returnUrl as string | undefined) || "/";
           router.push(returnUrl).catch(console.error);
         }
       } catch (err: any) {
@@ -55,8 +55,7 @@ export const FirebaseLogin = () => {
       await signInWithGoogle();
 
       if (isMounted()) {
-        const returnUrl =
-          (router.query.returnUrl as string | undefined) || "/dashboard";
+        const returnUrl = (router.query.returnUrl as string | undefined) || "/";
         router.push(returnUrl).catch(console.error);
       }
     } catch (err) {

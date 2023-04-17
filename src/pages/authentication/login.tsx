@@ -2,12 +2,9 @@ import { FirebaseLogin, GuestGuard, Logo } from "@components";
 import { Box, Card, Container, Divider, Link, Typography } from "@mui/material";
 import Head from "next/head";
 import NextLink from "next/link";
-import { useRouter } from "next/router";
 import { NextPageWithLayout } from "pages/_app";
 
 const Login: NextPageWithLayout = () => {
-  const router = useRouter();
-
   return (
     <>
       <Head>

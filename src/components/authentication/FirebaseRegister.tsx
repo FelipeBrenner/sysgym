@@ -37,7 +37,7 @@ export const FirebaseRegister = () => {
 
         if (isMounted()) {
           const returnUrl =
-            (router.query.returnUrl as string | undefined) || "/dashboard";
+            (router.query.returnUrl as string | undefined) || "/";
           router.push(returnUrl).catch(console.error);
         }
       } catch (err: any) {
