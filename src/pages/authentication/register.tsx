@@ -2,13 +2,9 @@ import { FirebaseRegister, GuestGuard, Logo } from "@components";
 import { Box, Card, Container, Divider, Link, Typography } from "@mui/material";
 import Head from "next/head";
 import NextLink from "next/link";
-import { useRouter } from "next/router";
 import { NextPageWithLayout } from "pages/_app";
 
 const Register: NextPageWithLayout = () => {
-  const router = useRouter();
-  const { disableGuard } = router.query;
-
   return (
     <>
       <Head>
@@ -61,11 +57,7 @@ const Register: NextPageWithLayout = () => {
             <div>
               <Link
                 component={NextLink}
-                href={
-                  disableGuard
-                    ? `/authentication/login?disableGuard=${disableGuard}`
-                    : "/authentication/login"
-                }
+                href={"/authentication/login"}
                 passHref
                 color="textSecondary"
                 variant="body2"

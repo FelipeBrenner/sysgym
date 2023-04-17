@@ -7,7 +7,6 @@ import { NextPageWithLayout } from "pages/_app";
 
 const Login: NextPageWithLayout = () => {
   const router = useRouter();
-  const { disableGuard } = router.query;
 
   return (
     <>
@@ -61,11 +60,7 @@ const Login: NextPageWithLayout = () => {
             <div>
               <Link
                 component={NextLink}
-                href={
-                  disableGuard
-                    ? `/authentication/register?disableGuard=${disableGuard}`
-                    : "/authentication/register"
-                }
+                href={"/authentication/register"}
                 passHref
                 color="textSecondary"
                 variant="body2"

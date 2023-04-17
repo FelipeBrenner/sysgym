@@ -10,7 +10,6 @@ import {
   signOut,
 } from "firebase/auth";
 import {
-  FC,
   ReactNode,
   createContext,
   useEffect,
@@ -83,7 +82,7 @@ export const AuthContext = createContext<AuthContextValue>({
   logout: () => Promise.resolve(),
 });
 
-export const AuthProvider: FC<AuthProviderProps> = (props) => {
+export const AuthProvider = (props: AuthProviderProps) => {
   const { children } = props;
   const [state, dispatch] = useReducer(reducer, initialState);
 

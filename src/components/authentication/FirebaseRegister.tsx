@@ -9,11 +9,10 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import { useRouter } from "next/router";
-import type { FC } from "react";
 import { useIsMounted } from "usehooks-ts";
 import * as Yup from "yup";
 
-export const FirebaseRegister: FC = (props) => {
+export const FirebaseRegister = () => {
   const isMounted = useIsMounted();
   const router = useRouter();
   const { createUserWithEmailAndPassword, signInWithGoogle } = useAuth();
@@ -62,7 +61,7 @@ export const FirebaseRegister: FC = (props) => {
   };
 
   return (
-    <div {...props}>
+    <>
       <Button
         fullWidth
         onClick={handleGoogleClick}
@@ -147,6 +146,6 @@ export const FirebaseRegister: FC = (props) => {
           </Button>
         </Box>
       </form>
-    </div>
+    </>
   );
 };

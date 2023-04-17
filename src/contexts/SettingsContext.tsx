@@ -1,6 +1,5 @@
 import {
   Dispatch,
-  FC,
   ReactNode,
   SetStateAction,
   createContext,
@@ -56,7 +55,7 @@ export const SettingsContext = createContext<SettingsContextValue>({
   setSettings: () => {},
 });
 
-export const SettingsProvider: FC<SettingsProviderProps> = (props) => {
+export const SettingsProvider = (props: SettingsProviderProps) => {
   const { children } = props;
   const [settings, setSettings] = useLocalStorage<Settings>(
     "settings",

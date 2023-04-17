@@ -3,11 +3,11 @@ import { useRouter } from "next/router";
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 
-interface GuestGuardProps {
+interface AuthGuardProps {
   children: ReactNode;
 }
 
-export const GuestGuard = (props: GuestGuardProps) => {
+export const AuthGuard = (props: AuthGuardProps) => {
   const { children } = props;
   const auth = useAuth();
   const router = useRouter();
@@ -19,8 +19,13 @@ export const GuestGuard = (props: GuestGuardProps) => {
         return;
       }
 
-      if (auth.isAuthenticated) {
-        router.push("/dashboard").catch(console.error);
+      if (!auth.isAuthenticated) {
+        router
+          .push({
+            pathname: "/authentication/login",
+            query: { returnUrl: router.asPath },
+          })
+          .catch(console.error);
       } else {
         setChecked(true);
       }
@@ -34,7 +39,7 @@ export const GuestGuard = (props: GuestGuardProps) => {
   }
 
   // If got here, it means that the redirect did not occur, and that tells us that the user is
-  // not authenticated / authorized.
+  // authenticated / authorized.
 
   return <>{children}</>;
 };
