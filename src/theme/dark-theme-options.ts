@@ -3,23 +3,23 @@ import { ThemeOptions } from "@mui/material";
 // Colors
 
 const neutral = {
-  100: "#F7FAFC",
-  200: "#EDF2F7",
-  300: "#E2E8F0",
-  400: "#CBD5E0",
-  500: "#A0AEC0",
-  600: "#718096",
-  700: "#4A5568",
-  800: "#2D3748",
-  900: "#1A202C",
+  100: "#8c8c8c",
+  200: "#808080",
+  300: "#737373",
+  400: "#666666",
+  500: "#595959",
+  600: "#4d4d4d",
+  700: "#404040",
+  800: "#333333",
+  900: "#262626",
 };
 
 const background = {
-  default: "#171923",
+  default: "#1a1a1a",
   paper: neutral[900],
 };
 
-const divider = "#2D3748";
+const divider = "#404040";
 
 const primary = {
   main: "#1dcaff",
@@ -64,8 +64,8 @@ const error = {
 };
 
 const text = {
-  primary: "#EDF2F7",
-  secondary: "#A0AEC0",
+  primary: "#e6e6e6",
+  secondary: "#b3b3b3",
   disabled: "rgba(255, 255, 255, 0.48)",
 };
 
