@@ -1,6 +1,6 @@
 import { FirebaseError } from "firebase/app";
 
-export const formatFirebaseError = (firebaseError: FirebaseError) => {
+export const firebaseErrorFormatted = (firebaseError: FirebaseError) => {
   switch (firebaseError.code) {
     case "auth/user-not-found":
       return "User is not registered";

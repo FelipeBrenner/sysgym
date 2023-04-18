@@ -8,7 +8,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { formatFirebaseError } from "@utils";
+import { firebaseErrorFormatted } from "@utils";
 import { useFormik } from "formik";
 import { useRouter } from "next/router";
 import { useIsMounted } from "usehooks-ts";
@@ -20,8 +20,8 @@ export const FirebaseLogin = () => {
   const { signInWithEmailAndPassword, signInWithGoogle } = useAuth();
   const formik = useFormik({
     initialValues: {
-      email: "demo@devias.io",
-      password: "Password123!",
+      email: "",
+      password: "",
       submit: null,
     },
     validationSchema: Yup.object({
@@ -41,7 +41,7 @@ export const FirebaseLogin = () => {
           router.push(returnUrl).catch(console.error);
         }
       } catch (err: any) {
-        const message = formatFirebaseError(err);
+        const message = firebaseErrorFormatted(err);
 
         if (isMounted()) {
           helpers.setStatus({ success: false });

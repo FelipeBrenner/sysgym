@@ -1,1 +1,1 @@
-export * from "./formatFirebaseError";
+export * from "./firebaseErrorFormatted";
