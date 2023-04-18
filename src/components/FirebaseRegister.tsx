@@ -131,21 +131,20 @@ export const FirebaseRegister = () => {
           <FormHelperText error>{formik.errors.policy}</FormHelperText>
         )}
         {formik.errors.submit && (
-          <Box sx={{ mt: 3 }}>
+          <Box sx={{ mt: 1 }}>
             <FormHelperText error>{formik.errors.submit}</FormHelperText>
           </Box>
         )}
-        <Box sx={{ mt: 2 }}>
-          <LoadingButton
-            loading={formik.isSubmitting}
-            fullWidth
-            size="large"
-            type="submit"
-            variant="contained"
-          >
-            Register
-          </LoadingButton>
-        </Box>
+        <LoadingButton
+          sx={{ mt: 2 }}
+          loading={formik.isSubmitting}
+          fullWidth
+          size="large"
+          type="submit"
+          variant="contained"
+        >
+          Register
+        </LoadingButton>
       </form>
     </>
   );
