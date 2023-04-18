@@ -1,4 +1,5 @@
 import { useAuth } from "@hooks";
+import { LoadingButton } from "@mui/lab";
 import {
   Box,
   Button,
@@ -7,6 +8,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { formatFirebaseError } from "@utils";
 import { useFormik } from "formik";
 import { useRouter } from "next/router";
 import { useIsMounted } from "usehooks-ts";
@@ -39,11 +41,11 @@ export const FirebaseLogin = () => {
           router.push(returnUrl).catch(console.error);
         }
       } catch (err: any) {
-        console.error(err);
+        const message = formatFirebaseError(err);
 
         if (isMounted()) {
           helpers.setStatus({ success: false });
-          helpers.setErrors({ submit: err.message });
+          helpers.setErrors({ submit: message });
           helpers.setSubmitting(false);
         }
       }
@@ -135,15 +137,15 @@ export const FirebaseLogin = () => {
           </Box>
         )}
         <Box sx={{ mt: 2 }}>
-          <Button
-            disabled={formik.isSubmitting}
+          <LoadingButton
+            loading={formik.isSubmitting}
             fullWidth
             size="large"
             type="submit"
             variant="contained"
           >
             Log In
-          </Button>
+          </LoadingButton>
         </Box>
       </form>
     </>

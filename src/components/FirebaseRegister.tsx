@@ -1,4 +1,5 @@
 import { useAuth } from "@hooks";
+import { LoadingButton } from "@mui/lab";
 import {
   Box,
   Button,
@@ -135,15 +136,15 @@ export const FirebaseRegister = () => {
           </Box>
         )}
         <Box sx={{ mt: 2 }}>
-          <Button
-            disabled={formik.isSubmitting}
+          <LoadingButton
+            loading={formik.isSubmitting}
             fullWidth
             size="large"
             type="submit"
             variant="contained"
           >
             Register
-          </Button>
+          </LoadingButton>
         </Box>
       </form>
     </>
