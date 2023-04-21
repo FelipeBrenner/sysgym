@@ -28,10 +28,10 @@ export const FirebaseLogin = () => {
     },
     validationSchema: Yup.object({
       email: Yup.string()
-        .email("Must be a valid email")
+        .email(t("emailValid"))
         .max(255)
-        .required("Email is required"),
-      password: Yup.string().max(255).required("Password is required"),
+        .required(t("emailRequired")),
+      password: Yup.string().max(255).required(t("passwordRequired")),
     }),
     onSubmit: async (values, helpers): Promise<void> => {
       try {

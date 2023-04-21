@@ -8,6 +8,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { firebaseErrorFormatted } from "@utils";
 import { useFormik } from "formik";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
@@ -23,16 +24,14 @@ export const FirebaseRegister = () => {
     initialValues: {
       email: "",
       password: "",
-      policy: true,
       submit: null,
     },
     validationSchema: Yup.object({
       email: Yup.string()
-        .email("Must be a valid email")
+        .email(t("emailValid"))
         .max(255)
-        .required("Email is required"),
-      password: Yup.string().min(7).max(255).required("Password is required"),
-      policy: Yup.boolean().oneOf([true], "This field must be checked"),
+        .required(t("emailRequired")),
+      password: Yup.string().max(255).required(t("passwordRequired")),
     }),
     onSubmit: async (values, helpers): Promise<void> => {
       try {
@@ -44,11 +43,11 @@ export const FirebaseRegister = () => {
           router.push(returnUrl).catch(console.error);
         }
       } catch (err: any) {
-        console.error(err);
+        const message = firebaseErrorFormatted(err);
 
         if (isMounted()) {
           helpers.setStatus({ success: false });
-          helpers.setErrors({ submit: err.message });
+          helpers.setErrors({ submit: message });
           helpers.setSubmitting(false);
         }
       }
@@ -129,9 +128,6 @@ export const FirebaseRegister = () => {
           type="password"
           value={formik.values.password}
         />
-        {Boolean(formik.touched.policy && formik.errors.policy) && (
-          <FormHelperText error>{formik.errors.policy}</FormHelperText>
-        )}
         {formik.errors.submit && (
           <Box sx={{ mt: 1 }}>
             <FormHelperText error>{formik.errors.submit}</FormHelperText>

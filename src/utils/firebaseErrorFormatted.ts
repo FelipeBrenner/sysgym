@@ -1,11 +1,14 @@
 import { FirebaseError } from "firebase/app";
+import { t } from "i18next";
 
 export const firebaseErrorFormatted = (firebaseError: FirebaseError) => {
   switch (firebaseError.code) {
     case "auth/user-not-found":
-      return "User is not registered";
+      return t("firebaseErrorUserNotFound");
     case "auth/operation-not-allowed":
-      return "Login has not been enabled for this project";
+      return t("firebaseErrorOperationNotAllowed");
+    case "auth/invalid-email":
+      return t("firebaseErrorInvalidEmail");
     default:
       return firebaseError.message;
   }
