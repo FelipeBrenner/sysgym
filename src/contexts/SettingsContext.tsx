@@ -29,32 +29,6 @@ const initialSettings: Settings = {
   language: "en",
 };
 
-export const restoreSettings = (): Settings | null => {
-  let settings = null;
-
-  try {
-    const storedData: string | null =
-      globalThis.localStorage.getItem("settings");
-
-    if (storedData) {
-      settings = JSON.parse(storedData);
-    } else {
-      settings = {
-        theme: globalThis.matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "light",
-        language: "en",
-      };
-    }
-  } catch (err) {
-    console.error(err);
-    // If stored data is not a strigified JSON this will fail,
-    // that's why we catch the error
-  }
-
-  return settings;
-};
-
 export const SettingsContext = createContext<SettingsContextValue>({
   settings: initialSettings,
   setSettings: () => {},
@@ -69,13 +43,7 @@ export const SettingsProvider = (props: SettingsProviderProps) => {
   const { i18n } = useTranslation();
 
   useEffect(() => {
-    const restoredSettings = restoreSettings();
-
-    i18n.changeLanguage(restoredSettings?.language);
-
-    if (restoredSettings) {
-      setSettings(restoredSettings);
-    }
+    i18n.changeLanguage(settings.language);
   }, []);
 
   const value = useMemo(
