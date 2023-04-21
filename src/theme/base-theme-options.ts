@@ -198,6 +198,21 @@ export const baseThemeOptions: ThemeOptions = {
         elevation: 16,
       },
     },
+    MuiMenu: {
+      styleOverrides: {
+        root: {
+          zIndex: 2100,
+        },
+      },
+    },
+    MuiSelect: {
+      styleOverrides: {
+        select: {
+          display: "flex",
+          alignItems: "center",
+        },
+      },
+    },
     MuiRadio: {
       defaultProps: {
         color: "primary",

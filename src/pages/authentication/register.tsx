@@ -3,12 +3,15 @@ import { Box, Card, Container, Divider, Link, Typography } from "@mui/material";
 import Head from "next/head";
 import NextLink from "next/link";
 import { NextPageWithLayout } from "pages/_app";
+import { useTranslation } from "react-i18next";
 
 const Register: NextPageWithLayout = () => {
+  const { t } = useTranslation();
+
   return (
     <>
       <Head>
-        <title>Register | SysGym</title>
+        <title>{t("register")} | SysGym</title>
       </Head>
       <Box
         component="main"
@@ -37,12 +40,10 @@ const Register: NextPageWithLayout = () => {
                 justifyContent: "center",
               }}
             >
-              <Link component={NextLink} href="/" passHref>
-                <Logo />
-              </Link>
-              <Typography variant="h4">Register</Typography>
+              <Logo />
+              <Typography variant="h4">{t("register")}</Typography>
               <Typography color="textSecondary" sx={{ mt: 2 }} variant="body2">
-                Register on the internal platform
+                {t("registerDescription")}
               </Typography>
             </Box>
             <Box
@@ -62,7 +63,7 @@ const Register: NextPageWithLayout = () => {
                 color="textSecondary"
                 variant="body2"
               >
-                Having an account
+                {t("havingAccount")}
               </Link>
             </div>
           </Card>

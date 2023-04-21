@@ -1,7 +1,7 @@
 import { SettingsDrawer } from "@components";
+import TuneIcon from "@mui/icons-material/Tune";
 import { Fab, Tooltip } from "@mui/material";
 import { useState } from "react";
-import { HiAdjustments } from "react-icons/hi";
 
 export const SettingsButton = () => {
   const [open, setOpen] = useState(false);
@@ -29,7 +29,7 @@ export const SettingsButton = () => {
             zIndex: 1900,
           }}
         >
-          <HiAdjustments size={20} />
+          <TuneIcon />
         </Fab>
       </Tooltip>
       <SettingsDrawer onClose={handleClose} open={open} />

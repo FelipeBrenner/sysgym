@@ -7,6 +7,7 @@ import {
 } from "@contexts";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { createTheme } from "@theme";
+import "i18n";
 import { NextPage } from "next";
 import { AppProps } from "next/app";
 import Head from "next/head";
@@ -27,6 +28,7 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   return (
     <>
       <Head>
+        <link rel="shortcut icon" href="/static/logo.png" />
         <title>SysGym</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>

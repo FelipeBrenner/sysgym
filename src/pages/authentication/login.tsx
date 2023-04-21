@@ -3,12 +3,15 @@ import { Box, Card, Container, Divider, Link, Typography } from "@mui/material";
 import Head from "next/head";
 import NextLink from "next/link";
 import { NextPageWithLayout } from "pages/_app";
+import { useTranslation } from "react-i18next";
 
 const Login: NextPageWithLayout = () => {
+  const { t } = useTranslation();
+
   return (
     <>
       <Head>
-        <title>Login | SysGym</title>
+        <title>{t("login")} | SysGym</title>
       </Head>
       <Box
         component="main"
@@ -37,12 +40,10 @@ const Login: NextPageWithLayout = () => {
                 justifyContent: "center",
               }}
             >
-              <Link component={NextLink} href="/" passHref>
-                <Logo />
-              </Link>
-              <Typography variant="h4">Log in</Typography>
+              <Logo />
+              <Typography variant="h4">{t("login")}</Typography>
               <Typography color="textSecondary" sx={{ mt: 2 }} variant="body2">
-                Sign in on the internal platform
+                {t("loginDescription")}
               </Typography>
             </Box>
             <Box
@@ -62,7 +63,7 @@ const Login: NextPageWithLayout = () => {
                 color="textSecondary"
                 variant="body2"
               >
-                Create new account
+                {t("createNewAccount")}
               </Link>
             </div>
           </Card>

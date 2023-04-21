@@ -11,12 +11,14 @@ import {
 import { firebaseErrorFormatted } from "@utils";
 import { useFormik } from "formik";
 import { useRouter } from "next/router";
+import { useTranslation } from "react-i18next";
 import { useIsMounted } from "usehooks-ts";
 import * as Yup from "yup";
 
 export const FirebaseLogin = () => {
   const isMounted = useIsMounted();
   const router = useRouter();
+  const { t } = useTranslation();
   const { signInWithEmailAndPassword, signInWithGoogle } = useAuth();
   const formik = useFormik({
     initialValues: {
@@ -100,7 +102,7 @@ export const FirebaseLogin = () => {
           <Divider orientation="horizontal" />
         </Box>
         <Typography color="textSecondary" sx={{ m: 2 }} variant="body1">
-          OR
+          {t("or")}
         </Typography>
         <Box sx={{ flexGrow: 1 }}>
           <Divider orientation="horizontal" />
@@ -111,7 +113,7 @@ export const FirebaseLogin = () => {
           error={Boolean(formik.touched.email && formik.errors.email)}
           fullWidth
           helperText={formik.touched.email && formik.errors.email}
-          label="Email Address"
+          label={t("email")}
           margin="normal"
           name="email"
           onBlur={formik.handleBlur}
@@ -123,7 +125,7 @@ export const FirebaseLogin = () => {
           error={Boolean(formik.touched.password && formik.errors.password)}
           fullWidth
           helperText={formik.touched.password && formik.errors.password}
-          label="Password"
+          label={t("password")}
           margin="normal"
           name="password"
           onBlur={formik.handleBlur}
@@ -144,7 +146,7 @@ export const FirebaseLogin = () => {
           type="submit"
           variant="contained"
         >
-          Log In
+          {t("login")}
         </LoadingButton>
       </form>
     </>

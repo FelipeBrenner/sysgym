@@ -1,3 +1,4 @@
+import { Language, Theme } from "@components";
 import {
   Dispatch,
   ReactNode,
@@ -6,10 +7,12 @@ import {
   useEffect,
   useMemo,
 } from "react";
+import { useTranslation } from "react-i18next";
 import { useLocalStorage } from "usehooks-ts";
 
 export interface Settings {
-  theme: "light" | "dark";
+  theme: Theme;
+  language: Language;
 }
 
 export interface SettingsContextValue {
@@ -23,6 +26,7 @@ interface SettingsProviderProps {
 
 const initialSettings: Settings = {
   theme: "light",
+  language: "en",
 };
 
 export const restoreSettings = (): Settings | null => {
@@ -39,6 +43,7 @@ export const restoreSettings = (): Settings | null => {
         theme: globalThis.matchMedia("(prefers-color-scheme: dark)").matches
           ? "dark"
           : "light",
+        language: "en",
       };
     }
   } catch (err) {
@@ -61,9 +66,12 @@ export const SettingsProvider = (props: SettingsProviderProps) => {
     "settings",
     initialSettings
   );
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     const restoredSettings = restoreSettings();
+
+    i18n.changeLanguage(restoredSettings?.language);
 
     if (restoredSettings) {
       setSettings(restoredSettings);

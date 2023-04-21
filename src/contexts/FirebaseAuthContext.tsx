@@ -90,18 +90,15 @@ export const AuthProvider = (props: AuthProviderProps) => {
     () =>
       onAuthStateChanged(auth, (user) => {
         if (user) {
-          // Here you should extract the complete user profile to make it available in your entire app.
-          // The auth state only provides basic information.
           dispatch({
             type: ActionType.AUTH_STATE_CHANGED,
             payload: {
               isAuthenticated: true,
               user: {
                 id: user.uid,
-                avatar: user.photoURL || undefined,
-                email: user.email || "anika.visser@devias.io",
-                name: "Anika Visser",
-                plan: "Premium",
+                avatar: user.photoURL || "",
+                email: user.email || "",
+                name: user.displayName || "",
               },
             },
           });

@@ -2,12 +2,15 @@ import { AuthGuard, Layout } from "@components";
 import { Box, Card, Container, Typography } from "@mui/material";
 import Head from "next/head";
 import { NextPageWithLayout } from "pages/_app";
+import { useTranslation } from "react-i18next";
 
 const Home: NextPageWithLayout = () => {
+  const { t } = useTranslation();
+
   return (
     <>
       <Head>
-        <title>SysGym</title>
+        <title>{t("profile")} | SysGym</title>
       </Head>
       <Box
         component="main"
@@ -31,7 +34,7 @@ const Home: NextPageWithLayout = () => {
             elevation={16}
             sx={{ p: 4, display: "flex", justifyContent: "center" }}
           >
-            <Typography>Home</Typography>
+            <Typography>{t("profile")}</Typography>
           </Card>
         </Container>
       </Box>
