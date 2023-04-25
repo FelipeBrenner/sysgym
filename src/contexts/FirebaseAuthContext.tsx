@@ -9,13 +9,7 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import {
-  ReactNode,
-  createContext,
-  useEffect,
-  useMemo,
-  useReducer,
-} from "react";
+import { ReactNode, createContext, useEffect, useMemo, useState } from "react";
 
 const auth = getAuth(firebaseApp);
 
@@ -39,43 +33,10 @@ interface AuthProviderProps {
   children: ReactNode;
 }
 
-enum ActionType {
-  AUTH_STATE_CHANGED = "AUTH_STATE_CHANGED",
-}
-
-type AuthStateChangedAction = {
-  type: ActionType.AUTH_STATE_CHANGED;
-  payload: {
-    isAuthenticated: boolean;
-    user: User | null;
-  };
-};
-
-type Action = AuthStateChangedAction;
-
-const initialState: State = {
+export const AuthContext = createContext<AuthContextValue>({
   isAuthenticated: false,
   isInitialized: false,
   user: null,
-};
-
-const reducer = (state: State, action: Action): State => {
-  if (action.type === "AUTH_STATE_CHANGED") {
-    const { isAuthenticated, user } = action.payload;
-
-    return {
-      ...state,
-      isAuthenticated,
-      isInitialized: true,
-      user,
-    };
-  }
-
-  return state;
-};
-
-export const AuthContext = createContext<AuthContextValue>({
-  ...initialState,
   createUserWithEmailAndPassword: () => Promise.resolve(),
   signInWithEmailAndPassword: () => Promise.resolve(),
   signInWithGoogle: () => Promise.resolve(),
@@ -84,35 +45,28 @@ export const AuthContext = createContext<AuthContextValue>({
 
 export const AuthProvider = (props: AuthProviderProps) => {
   const { children } = props;
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [isAuthenticated, setIsAutheticated] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(
     () =>
       onAuthStateChanged(auth, (user) => {
         if (user) {
-          dispatch({
-            type: ActionType.AUTH_STATE_CHANGED,
-            payload: {
-              isAuthenticated: true,
-              user: {
-                id: user.uid,
-                avatar: user.photoURL || "",
-                email: user.email || "",
-                name: user.displayName || "",
-              },
-            },
+          setIsAutheticated(true);
+          setUser({
+            id: user.uid,
+            avatar: user.photoURL || "",
+            email: user.email || "",
+            name: user.displayName || "",
           });
         } else {
-          dispatch({
-            type: ActionType.AUTH_STATE_CHANGED,
-            payload: {
-              isAuthenticated: false,
-              user: null,
-            },
-          });
+          setIsAutheticated(false);
+          setUser(null);
         }
+        setIsInitialized(true);
       }),
-    [dispatch]
+    []
   );
 
   const _signInWithEmailAndPassword = async (
@@ -141,14 +95,18 @@ export const AuthProvider = (props: AuthProviderProps) => {
 
   const value = useMemo(
     () => ({
-      ...state,
+      isAuthenticated,
+      isInitialized,
+      user,
       createUserWithEmailAndPassword: _createUserWithEmailAndPassword,
       signInWithEmailAndPassword: _signInWithEmailAndPassword,
       signInWithGoogle,
       logout,
     }),
     [
-      state,
+      isAuthenticated,
+      isInitialized,
+      user,
       _createUserWithEmailAndPassword,
       _signInWithEmailAndPassword,
       signInWithGoogle,
