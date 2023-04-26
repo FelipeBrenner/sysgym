@@ -1,3 +1,4 @@
+import { createUser, getUser } from "@database";
 import { firebaseApp } from "@services";
 import { User } from "@types";
 import {
@@ -13,13 +14,10 @@ import { ReactNode, createContext, useEffect, useMemo, useState } from "react";
 
 const auth = getAuth(firebaseApp);
 
-interface State {
+export interface AuthContextValue {
   isInitialized: boolean;
   isAuthenticated: boolean;
   user: User | null;
-}
-
-export interface AuthContextValue extends State {
   createUserWithEmailAndPassword: (
     email: string,
     password: string
@@ -51,15 +49,24 @@ export const AuthProvider = (props: AuthProviderProps) => {
 
   useEffect(
     () =>
-      onAuthStateChanged(auth, (user) => {
+      onAuthStateChanged(auth, async (user) => {
         if (user) {
           setIsAutheticated(true);
-          setUser({
-            id: user.uid,
-            avatar: user.photoURL || "",
-            email: user.email || "",
-            name: user.displayName || "",
-          });
+          const dbUser = await getUser(user.uid);
+
+          if (dbUser) {
+            setUser(dbUser);
+          } else {
+            const newUser: User = {
+              id: user.uid,
+              avatar: user.photoURL || "",
+              email: user.email || "",
+              name: user.displayName || "",
+            };
+
+            createUser(newUser);
+            setUser(newUser);
+          }
         } else {
           setIsAutheticated(false);
           setUser(null);
