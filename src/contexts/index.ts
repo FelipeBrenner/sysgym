@@ -1,2 +1,2 @@
-export * from "./FirebaseAuthContext";
+export * from "./AuthContext";
 export * from "./SettingsContext";
