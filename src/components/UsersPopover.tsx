@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import NextLink from "next/link";
+import { useTranslation } from "react-i18next";
 
 interface UsersPopoverProps {
   anchorEl: null | Element;
@@ -16,8 +17,13 @@ interface UsersPopoverProps {
   open?: boolean;
 }
 
-export const UsersPopover = (props: UsersPopoverProps) => {
-  const { anchorEl, onClose, open, ...other } = props;
+export const UsersPopover = ({
+  anchorEl,
+  onClose,
+  open,
+  ...other
+}: UsersPopoverProps) => {
+  const { t } = useTranslation();
   const { users } = useDatabase();
 
   return (
@@ -38,7 +44,7 @@ export const UsersPopover = (props: UsersPopoverProps) => {
       transitionDuration={0}
       {...other}
     >
-      <Typography variant="h6">Users</Typography>
+      <Typography variant="h6">{t("users")}</Typography>
       <Box sx={{ mt: 2 }}>
         <List disablePadding>
           {users.map((user) => (

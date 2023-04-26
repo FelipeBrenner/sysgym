@@ -30,8 +30,8 @@ export const AccountPopover = ({
   ...other
 }: AccountPopoverProps) => {
   const router = useRouter();
-  const { logout } = useAuth();
   const { t } = useTranslation();
+  const { logout } = useAuth();
   const { user } = useAuth();
 
   const handleLogout = async (): Promise<void> => {

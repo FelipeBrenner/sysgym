@@ -31,6 +31,7 @@ export const resources: Resource = {
       language: "Language",
       languageChanged: "Language changed",
       profile: "Profile",
+      users: "Users",
     },
   },
   br: {
@@ -62,6 +63,7 @@ export const resources: Resource = {
       language: "Linguagem",
       languageChanged: "Linguagem alterada",
       profile: "Perfil",
+      users: "Usuários",
     },
   },
 };
