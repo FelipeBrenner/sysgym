@@ -30,8 +30,17 @@ export const resources: Resource = {
       colorScheme: "Color Scheme",
       language: "Language",
       languageChanged: "Language changed",
-      profile: "Profile",
+      profile: {
+        title: "Profile",
+        basicDetails: "Basic details",
+        deleteAccount: "Delete account",
+        deleteAccountDescription:
+          "Delete your account and all of your source data. This is irreversible.",
+      },
       users: "Users",
+      change: "Change",
+      edit: "Edit",
+      save: "Save",
     },
   },
   br: {
@@ -62,8 +71,17 @@ export const resources: Resource = {
       colorScheme: "Esquema de Cores",
       language: "Linguagem",
       languageChanged: "Linguagem alterada",
-      profile: "Perfil",
+      profile: {
+        title: "Perfil",
+        basicDetails: "Detalhes básicos",
+        deleteAccount: "Excluir conta",
+        deleteAccountDescription:
+          "Exclua sua conta e todos os seus dados de origem. Isso é irreversível.",
+      },
       users: "Usuários",
+      change: "Alterar",
+      edit: "Editar",
+      save: "Salvar",
     },
   },
 };

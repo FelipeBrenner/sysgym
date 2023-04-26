@@ -1,10 +1,10 @@
 import { AuthGuard, Layout } from "@components";
 import { Box, Card, Container, Typography } from "@mui/material";
 import Head from "next/head";
-import { NextPageWithLayout } from "pages/_app";
 import { useTranslation } from "react-i18next";
+import { NextPageWithLayout } from "./_app";
 
-const Home: NextPageWithLayout = () => {
+const Chat: NextPageWithLayout = () => {
   const { t } = useTranslation();
 
   return (
@@ -15,7 +15,6 @@ const Home: NextPageWithLayout = () => {
       <Box
         component="main"
         sx={{
-          backgroundColor: "background.default",
           display: "flex",
           flexDirection: "column",
           minHeight: "100%",
@@ -42,10 +41,10 @@ const Home: NextPageWithLayout = () => {
   );
 };
 
-Home.getLayout = (page) => (
+Chat.getLayout = (page) => (
   <AuthGuard>
     <Layout>{page}</Layout>
   </AuthGuard>
 );
 
-export default Home;
+export default Chat;

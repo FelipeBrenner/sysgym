@@ -19,8 +19,8 @@ import { useTranslation } from "react-i18next";
 
 interface AccountPopoverProps {
   anchorEl: null | Element;
-  onClose?: () => void;
-  open?: boolean;
+  onClose: () => void;
+  open: boolean;
 }
 
 export const AccountPopover = ({
@@ -93,7 +93,9 @@ export const AccountPopover = ({
             <AccountCircleIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText
-            primary={<Typography variant="body1">{t("profile")}</Typography>}
+            primary={
+              <Typography variant="body1">{t("profile.title")}</Typography>
+            }
           />
         </MenuItem>
         <Divider />

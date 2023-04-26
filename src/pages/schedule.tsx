@@ -4,7 +4,7 @@ import Head from "next/head";
 import { NextPageWithLayout } from "pages/_app";
 import { useTranslation } from "react-i18next";
 
-const Home: NextPageWithLayout = () => {
+const Schedule: NextPageWithLayout = () => {
   const { t } = useTranslation();
 
   return (
@@ -15,7 +15,6 @@ const Home: NextPageWithLayout = () => {
       <Box
         component="main"
         sx={{
-          backgroundColor: "background.default",
           display: "flex",
           flexDirection: "column",
           minHeight: "100%",
@@ -42,10 +41,10 @@ const Home: NextPageWithLayout = () => {
   );
 };
 
-Home.getLayout = (page) => (
+Schedule.getLayout = (page) => (
   <AuthGuard>
     <Layout>{page}</Layout>
   </AuthGuard>
 );
 
-export default Home;
+export default Schedule;

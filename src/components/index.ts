@@ -6,6 +6,7 @@ export * from "./GuestGuard";
 export * from "./LanguageSelect";
 export * from "./Layout/Layout";
 export * from "./Logo";
+export * from "./ProfileGeneral";
 export * from "./Scrollbar";
 export * from "./SettingsButton";
 export * from "./SettingsDrawer";

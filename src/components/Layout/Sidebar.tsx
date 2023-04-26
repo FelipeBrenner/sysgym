@@ -1,4 +1,5 @@
 import { Logo, Scrollbar } from "@components";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AssessmentIcon from "@mui/icons-material/Assessment";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import ForumIcon from "@mui/icons-material/Forum";
@@ -54,6 +55,11 @@ const getSections = (t: TFunction): Section[] => [
   {
     title: t("personal"),
     items: [
+      {
+        title: t("profile.title"),
+        path: "/profile",
+        icon: <AccountCircleIcon fontSize="small" />,
+      },
       {
         title: t("assessments"),
         path: "/assessments",

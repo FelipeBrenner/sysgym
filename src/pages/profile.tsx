@@ -1,51 +1,54 @@
-import { AuthGuard, Layout } from "@components";
-import { Box, Card, Container, Typography } from "@mui/material";
+import { AuthGuard, Layout, ProfileGeneral } from "@components";
+import { Box, Container, Divider, Tab, Tabs, Typography } from "@mui/material";
+import { t } from "i18next";
 import Head from "next/head";
-import { NextPageWithLayout } from "pages/_app";
+import { ChangeEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { NextPageWithLayout } from "./_app";
 
-const Home: NextPageWithLayout = () => {
+const tabs = [{ label: t("general"), value: "general" }];
+
+const Profile: NextPageWithLayout = () => {
   const { t } = useTranslation();
+  const [currentTab, setCurrentTab] = useState<string>("general");
+
+  const handleTabsChange = (event: ChangeEvent<{}>, value: string): void => {
+    setCurrentTab(value);
+  };
 
   return (
     <>
       <Head>
-        <title>{t("profile")} | SysGym</title>
+        <title>{t("profile.title")} | SysGym</title>
       </Head>
-      <Box
-        component="main"
-        sx={{
-          backgroundColor: "background.default",
-          display: "flex",
-          flexDirection: "column",
-          minHeight: "100%",
-        }}
-      >
-        <Container
-          maxWidth="sm"
-          sx={{
-            py: {
-              xs: "60px",
-              md: "120px",
-            },
-          }}
-        >
-          <Card
-            elevation={16}
-            sx={{ p: 4, display: "flex", justifyContent: "center" }}
+      <Box component="main">
+        <Container maxWidth="md">
+          <Typography variant="h4">{t("profile.title")}</Typography>
+          <Tabs
+            indicatorColor="primary"
+            onChange={handleTabsChange}
+            scrollButtons="auto"
+            textColor="primary"
+            value={currentTab}
+            variant="scrollable"
+            sx={{ mt: 3 }}
           >
-            <Typography>{t("profile")}</Typography>
-          </Card>
+            {tabs.map((tab) => (
+              <Tab key={tab.value} label={tab.label} value={tab.value} />
+            ))}
+          </Tabs>
+          <Divider sx={{ mb: 3 }} />
+          {currentTab === "general" && <ProfileGeneral />}
         </Container>
       </Box>
     </>
   );
 };
 
-Home.getLayout = (page) => (
+Profile.getLayout = (page) => (
   <AuthGuard>
     <Layout>{page}</Layout>
   </AuthGuard>
 );
 
-export default Home;
+export default Profile;

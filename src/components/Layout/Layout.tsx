@@ -31,6 +31,9 @@ export const Layout = ({ children }: LayoutProps) => {
             flex: "1 1 auto",
             flexDirection: "column",
             width: "100%",
+            color: "text.primary",
+            backgroundColor: "background.default",
+            py: 8,
           }}
         >
           {children}
