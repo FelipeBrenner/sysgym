@@ -1,6 +1,7 @@
-import { AccountPopover } from "@components";
+import { AccountPopover, UsersPopover } from "@components";
 import { useAuth } from "@hooks";
 import MenuIcon from "@mui/icons-material/Menu";
+import PeopleIcon from "@mui/icons-material/People";
 import {
   AppBar,
   AppBarProps,
@@ -9,6 +10,7 @@ import {
   ButtonBase,
   IconButton,
   Toolbar,
+  Tooltip,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { getUserAcronym } from "@utils";
@@ -32,6 +34,34 @@ const NavbarRoot = styled(AppBar)(({ theme }) => ({
         boxShadow: "none",
       }),
 }));
+
+const UsersButton = () => {
+  const anchorRef = useRef<HTMLButtonElement | null>(null);
+  const [openPopover, setOpenPopover] = useState<boolean>(false);
+
+  const handleOpenPopover = (): void => {
+    setOpenPopover(true);
+  };
+
+  const handleClosePopover = (): void => {
+    setOpenPopover(false);
+  };
+
+  return (
+    <>
+      <Tooltip title="Users">
+        <IconButton onClick={handleOpenPopover} sx={{ ml: 1 }} ref={anchorRef}>
+          <PeopleIcon fontSize="small" />
+        </IconButton>
+      </Tooltip>
+      <UsersPopover
+        anchorEl={anchorRef.current}
+        onClose={handleClosePopover}
+        open={openPopover}
+      />
+    </>
+  );
+};
 
 const AccountButton = () => {
   const anchorRef = useRef<HTMLButtonElement | null>(null);
@@ -110,6 +140,7 @@ export const Navbar = ({ onOpenSidebar, ...other }: NavbarProps) => (
           <MenuIcon fontSize="small" />
         </IconButton>
         <Box sx={{ flexGrow: 1 }} />
+        <UsersButton />
         <AccountButton />
       </Toolbar>
     </NavbarRoot>

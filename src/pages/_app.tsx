@@ -2,6 +2,7 @@ import { SettingsButton, SplashScreen } from "@components";
 import {
   AuthConsumer,
   AuthProvider,
+  DatabaseProvider,
   SettingsConsumer,
   SettingsProvider,
 } from "@contexts";
@@ -33,30 +34,32 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <AuthProvider>
-        <SettingsProvider>
-          <SettingsConsumer>
-            {({ settings }) => (
-              <ThemeProvider
-                theme={createTheme({
-                  mode: settings.theme,
-                })}
-              >
-                <CssBaseline />
-                <Toaster position="top-center" />
-                <SettingsButton />
-                <AuthConsumer>
-                  {(auth) =>
-                    !auth.isInitialized ? (
-                      <SplashScreen />
-                    ) : (
-                      getLayout(<Component {...pageProps} />)
-                    )
-                  }
-                </AuthConsumer>
-              </ThemeProvider>
-            )}
-          </SettingsConsumer>
-        </SettingsProvider>
+        <DatabaseProvider>
+          <SettingsProvider>
+            <SettingsConsumer>
+              {({ settings }) => (
+                <ThemeProvider
+                  theme={createTheme({
+                    mode: settings.theme,
+                  })}
+                >
+                  <CssBaseline />
+                  <Toaster position="top-center" />
+                  <SettingsButton />
+                  <AuthConsumer>
+                    {(auth) =>
+                      !auth.isInitialized ? (
+                        <SplashScreen />
+                      ) : (
+                        getLayout(<Component {...pageProps} />)
+                      )
+                    }
+                  </AuthConsumer>
+                </ThemeProvider>
+              )}
+            </SettingsConsumer>
+          </SettingsProvider>
+        </DatabaseProvider>
       </AuthProvider>
     </>
   );

@@ -41,8 +41,7 @@ export const AuthContext = createContext<AuthContextValue>({
   logout: () => Promise.resolve(),
 });
 
-export const AuthProvider = (props: AuthProviderProps) => {
-  const { children } = props;
+export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [isAuthenticated, setIsAutheticated] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
   const [user, setUser] = useState<User | null>(null);

@@ -11,3 +11,4 @@ export * from "./SettingsButton";
 export * from "./SettingsDrawer";
 export * from "./SplashScreen";
 export * from "./ThemeButtons";
+export * from "./UsersPopover";

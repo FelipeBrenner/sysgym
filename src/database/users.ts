@@ -20,7 +20,7 @@ export const getUser = async (id: string) => {
 
 export const getUsers = async () => {
   const data = await getDocs(usersCollectionRef);
-  return data.docs.map((doc) => doc.data());
+  return data.docs.map((doc) => doc.data()) as User[];
 };
 
 export const createUser = async (user: User) => {

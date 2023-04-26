@@ -34,8 +34,7 @@ export const SettingsContext = createContext<SettingsContextValue>({
   setSettings: () => {},
 });
 
-export const SettingsProvider = (props: SettingsProviderProps) => {
-  const { children } = props;
+export const SettingsProvider = ({ children }: SettingsProviderProps) => {
   const [settings, setSettings] = useLocalStorage<Settings>(
     "settings",
     initialSettings
