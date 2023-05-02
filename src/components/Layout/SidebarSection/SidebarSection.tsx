@@ -1,7 +1,8 @@
 import type { ListProps } from "@mui/material";
-import { List, ListSubheader } from "@mui/material";
+import { List } from "@mui/material";
 import type { ReactNode } from "react";
-import { SidebarItem } from "./SidebarItem";
+import { SidebarItem } from "../SidebarItem/SidebarItem";
+import * as Styles from "./SidebarSection.styles";
 
 interface Item {
   path?: string;
@@ -97,20 +98,9 @@ export const SidebarSection = ({
 }: SidebarSectionProps) => (
   <List
     subheader={
-      <ListSubheader
-        disableGutters
-        disableSticky
-        sx={{
-          color: "neutral.500",
-          fontSize: "0.75rem",
-          fontWeight: 700,
-          lineHeight: 2.5,
-          ml: 4,
-          textTransform: "uppercase",
-        }}
-      >
+      <Styles.ListSubheader disableGutters disableSticky>
         {title}
-      </ListSubheader>
+      </Styles.ListSubheader>
     }
     {...other}
   >

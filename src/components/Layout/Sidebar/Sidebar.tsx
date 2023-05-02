@@ -1,17 +1,17 @@
-import { Logo, Scrollbar } from "@components";
+import { Scrollbar } from "@components";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AssessmentIcon from "@mui/icons-material/Assessment";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import ForumIcon from "@mui/icons-material/Forum";
 import HomeIcon from "@mui/icons-material/Home";
 import type { Theme } from "@mui/material";
-import { Box, Drawer, useMediaQuery } from "@mui/material";
+import { Drawer, useMediaQuery } from "@mui/material";
 import { TFunction } from "i18next";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { ReactNode, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { SidebarSection } from "./SidebarSection";
+import * as Styles from "./Sidebar.styles";
 
 interface SidebarProps {
   onClose?: () => void;
@@ -98,46 +98,22 @@ export const Sidebar = ({ onClose, open }: SidebarProps) => {
         },
       }}
     >
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          height: "100%",
-        }}
-      >
-        <Box
+      <Styles.LogoBox component={NextLink} href="/">
+        <Styles.Logo />
+      </Styles.LogoBox>
+      {sections.map((section) => (
+        <Styles.SidebarSection
+          key={section.title}
+          path={router.asPath}
           sx={{
-            width: "100%",
-            display: "flex",
-            justifyContent: "center",
-            pt: 3,
+            mt: 2,
+            "& + &": {
+              mt: 2,
+            },
           }}
-          component={NextLink}
-          href="/"
-        >
-          <Logo
-            sx={{
-              height: 48,
-              width: 48,
-            }}
-          />
-        </Box>
-        <Box sx={{ flexGrow: 1 }}>
-          {sections.map((section) => (
-            <SidebarSection
-              key={section.title}
-              path={router.asPath}
-              sx={{
-                mt: 2,
-                "& + &": {
-                  mt: 2,
-                },
-              }}
-              {...section}
-            />
-          ))}
-        </Box>
-      </Box>
+          {...section}
+        />
+      ))}
     </Scrollbar>
   );
 

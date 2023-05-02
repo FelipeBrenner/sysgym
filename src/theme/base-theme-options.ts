@@ -298,7 +298,7 @@ export const baseThemeOptions: ThemeOptions = {
     },
     overline: {
       fontSize: "0.75rem",
-      fontWeight: 600,
+      fontWeight: 700,
       letterSpacing: "0.5px",
       lineHeight: 2.5,
       textTransform: "uppercase",

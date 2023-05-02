@@ -1,5 +1,4 @@
-import type { Theme } from "@mui/material";
-import { styled } from "@mui/material/styles";
+import { Theme, styled } from "@mui/material";
 import type { SxProps } from "@mui/system";
 import type { MutableRefObject } from "react";
 import { forwardRef } from "react";

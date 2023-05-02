@@ -4,7 +4,7 @@ export * from "./FirebaseLogin";
 export * from "./FirebaseRegister";
 export * from "./GuestGuard";
 export * from "./LanguageSelect";
-export * from "./Layout/Layout";
+export * from "./Layout";
 export * from "./Logo";
 export * from "./ProfileGeneral";
 export * from "./Scrollbar";
