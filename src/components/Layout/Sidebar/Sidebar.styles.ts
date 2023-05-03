@@ -1,6 +1,6 @@
-import { Logo as LogoComponent } from "@components";
 import { Box, styled } from "@mui/material";
 import { LinkProps } from "next/link";
+import { Logo as LogoComponent } from "../../Logo/Logo";
 import { SidebarSection as SidebarSectionComponent } from "../SidebarSection";
 
 export const SidebarSection = styled(SidebarSectionComponent)(({ theme }) => ({

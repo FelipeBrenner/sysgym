@@ -1,9 +1,9 @@
-import { SettingsDrawer } from "@components";
 import TuneIcon from "@mui/icons-material/Tune";
 import { Fab, Tooltip } from "@mui/material";
 import { useState } from "react";
+import { SettingsDrawer } from "./SettingsDrawer";
 
-export const SettingsButton = () => {
+export const Settings = () => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {

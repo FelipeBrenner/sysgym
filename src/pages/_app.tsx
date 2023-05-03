@@ -1,4 +1,4 @@
-import { SettingsButton, SplashScreen } from "@components";
+import { Settings, SplashScreen } from "@components";
 import {
   AuthConsumer,
   AuthProvider,
@@ -45,7 +45,7 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
                 >
                   <CssBaseline />
                   <Toaster position="top-center" />
-                  <SettingsButton />
+                  <Settings />
                   <AuthConsumer>
                     {(auth) =>
                       !auth.isInitialized ? (

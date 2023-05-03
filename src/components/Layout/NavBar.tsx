@@ -1,4 +1,3 @@
-import { AccountPopover, UsersPopover } from "@components";
 import { useAuth } from "@hooks";
 import MenuIcon from "@mui/icons-material/Menu";
 import PeopleIcon from "@mui/icons-material/People";
@@ -15,6 +14,8 @@ import {
 import { styled } from "@mui/material/styles";
 import { getUserAcronym } from "@utils";
 import { useRef, useState } from "react";
+import { AccountPopover } from "./AccountPopover";
+import { UsersPopover } from "./UsersPopover";
 
 interface NavbarProps extends AppBarProps {
   onOpenSidebar?: () => void;
