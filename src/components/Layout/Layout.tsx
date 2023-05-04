@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { useState } from "react";
 import * as Styles from "./Layout.styles";
 import { Navbar } from "./NavBar";
-import { Sidebar } from "./Sidebar/Sidebar";
+import { Sidebar } from "./Sidebar";
 
 interface LayoutProps {
   children?: ReactNode;
