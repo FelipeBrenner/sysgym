@@ -1,4 +1,4 @@
-import { Language, Theme } from "@components";
+import { ThemeType } from "@theme";
 import {
   Dispatch,
   ReactNode,
@@ -10,9 +10,11 @@ import {
 import { useTranslation } from "react-i18next";
 import { useLocalStorage } from "usehooks-ts";
 
+export type LanguageType = "en" | "br";
+
 export interface Settings {
-  theme: Theme;
-  language: Language;
+  theme: ThemeType;
+  language: LanguageType;
 }
 
 export interface SettingsContextValue {

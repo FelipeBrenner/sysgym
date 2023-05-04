@@ -26,8 +26,10 @@ declare module "@mui/material/styles" {
   }
 }
 
+export type ThemeType = "light" | "dark";
+
 interface ThemeConfig {
-  mode: "light" | "dark";
+  mode: ThemeType;
 }
 
 export const createTheme = (config: ThemeConfig): Theme => {

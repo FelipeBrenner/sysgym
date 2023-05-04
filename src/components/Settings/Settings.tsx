@@ -1,7 +1,8 @@
 import TuneIcon from "@mui/icons-material/Tune";
-import { Fab, Tooltip } from "@mui/material";
+import { Tooltip } from "@mui/material";
 import { useState } from "react";
-import { SettingsDrawer } from "./SettingsDrawer";
+import * as Styles from "./Settings.styles";
+import { SettingsDrawer } from "./SettingsDrawer/SettingsDrawer";
 
 export const Settings = () => {
   const [open, setOpen] = useState(false);
@@ -17,20 +18,13 @@ export const Settings = () => {
   return (
     <>
       <Tooltip title="Settings">
-        <Fab
+        <Styles.SettingsButton
           color="primary"
           onClick={handleOpen}
           size="medium"
-          sx={{
-            bottom: 0,
-            margin: (theme) => theme.spacing(4),
-            position: "fixed",
-            right: 0,
-            zIndex: 1900,
-          }}
         >
           <TuneIcon />
-        </Fab>
+        </Styles.SettingsButton>
       </Tooltip>
       <SettingsDrawer onClose={handleClose} open={open} />
     </>

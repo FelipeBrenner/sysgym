@@ -41,6 +41,10 @@ export const resources: Resource = {
       change: "Change",
       edit: "Edit",
       save: "Save",
+      light: "Light",
+      dark: "Dark",
+      english: "English",
+      portuguese: "Portuguese",
     },
   },
   br: {
@@ -82,6 +86,10 @@ export const resources: Resource = {
       change: "Alterar",
       edit: "Editar",
       save: "Salvar",
+      light: "Claro",
+      dark: "Escuro",
+      english: "Inglês",
+      portuguese: "Português",
     },
   },
 };

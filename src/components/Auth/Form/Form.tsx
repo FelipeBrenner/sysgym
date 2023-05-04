@@ -27,9 +27,7 @@ export const Form = ({ formik, handleGoogleClick, submitText }: FormProps) => {
         <Styles.FlexGrowBox>
           <Divider orientation="horizontal" />
         </Styles.FlexGrowBox>
-        <Styles.DividerText color="textSecondary" variant="body1">
-          {t("or")}
-        </Styles.DividerText>
+        <Styles.DividerText variant="body1">{t("or")}</Styles.DividerText>
         <Styles.FlexGrowBox>
           <Divider orientation="horizontal" />
         </Styles.FlexGrowBox>

@@ -26,6 +26,7 @@ export const DividerBox = styled(Box)(({ theme }) => ({
 
 export const DividerText = styled(Typography)(({ theme }) => ({
   margin: theme.spacing(2),
+  color: theme.palette.text.secondary,
 }));
 
 export const SubmitError = styled(FormHelperText)(({ theme }) => ({
