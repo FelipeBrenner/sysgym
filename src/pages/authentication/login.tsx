@@ -1,11 +1,11 @@
-import { FirebaseLogin, GuestGuard, Logo } from "@components";
+import { GuestGuard, Login, Logo } from "@components";
 import { Box, Card, Container, Divider, Link, Typography } from "@mui/material";
 import Head from "next/head";
 import NextLink from "next/link";
 import { NextPageWithLayout } from "pages/_app";
 import { useTranslation } from "react-i18next";
 
-const Login: NextPageWithLayout = () => {
+const LoginPage: NextPageWithLayout = () => {
   const { t } = useTranslation();
 
   return (
@@ -52,7 +52,7 @@ const Login: NextPageWithLayout = () => {
                 mt: 3,
               }}
             >
-              <FirebaseLogin />
+              <Login />
             </Box>
             <Divider sx={{ my: 3 }} />
             <div>
@@ -73,6 +73,6 @@ const Login: NextPageWithLayout = () => {
   );
 };
 
-Login.getLayout = (page) => <GuestGuard>{page}</GuestGuard>;
+LoginPage.getLayout = (page) => <GuestGuard>{page}</GuestGuard>;
 
-export default Login;
+export default LoginPage;

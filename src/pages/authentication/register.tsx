@@ -1,11 +1,11 @@
-import { FirebaseRegister, GuestGuard, Logo } from "@components";
+import { GuestGuard, Logo, Register } from "@components";
 import { Box, Card, Container, Divider, Link, Typography } from "@mui/material";
 import Head from "next/head";
 import NextLink from "next/link";
 import { NextPageWithLayout } from "pages/_app";
 import { useTranslation } from "react-i18next";
 
-const Register: NextPageWithLayout = () => {
+const RegisterPage: NextPageWithLayout = () => {
   const { t } = useTranslation();
 
   return (
@@ -52,7 +52,7 @@ const Register: NextPageWithLayout = () => {
                 mt: 3,
               }}
             >
-              <FirebaseRegister />
+              <Register />
             </Box>
             <Divider sx={{ my: 3 }} />
             <div>
@@ -73,6 +73,6 @@ const Register: NextPageWithLayout = () => {
   );
 };
 
-Register.getLayout = (page) => <GuestGuard>{page}</GuestGuard>;
+RegisterPage.getLayout = (page) => <GuestGuard>{page}</GuestGuard>;
 
-export default Register;
+export default RegisterPage;
