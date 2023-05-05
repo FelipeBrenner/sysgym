@@ -4,12 +4,27 @@ import { initReactI18next } from "react-i18next";
 export const resources: Resource = {
   en: {
     translation: {
+      home: {
+        title: "Home",
+      },
+      schedule: {
+        title: "Schedule",
+      },
+      chat: {
+        title: "Chat",
+      },
+      assessments: {
+        title: "Assessments",
+      },
+      profile: {
+        title: "Profile",
+        basicDetails: "Basic details",
+        deleteAccount: "Delete account",
+        deleteAccountDescription:
+          "Delete your account and all of your source data. This is irreversible.",
+      },
       general: "General",
-      home: "Home",
-      schedule: "Schedule",
-      chat: "Chat",
       personal: "Personal",
-      assessments: "Assessments",
       login: "Login",
       loginDescription: "Sign in on the platform",
       email: "Email",
@@ -30,13 +45,7 @@ export const resources: Resource = {
       colorScheme: "Color Scheme",
       language: "Language",
       languageChanged: "Language changed",
-      profile: {
-        title: "Profile",
-        basicDetails: "Basic details",
-        deleteAccount: "Delete account",
-        deleteAccountDescription:
-          "Delete your account and all of your source data. This is irreversible.",
-      },
+
       users: "Users",
       change: "Change",
       edit: "Edit",
@@ -49,12 +58,27 @@ export const resources: Resource = {
   },
   br: {
     translation: {
+      home: {
+        title: "Home",
+      },
+      schedule: {
+        title: "Agenda",
+      },
+      chat: {
+        title: "Chat",
+      },
+      assessments: {
+        title: "Avaliações",
+      },
+      profile: {
+        title: "Perfil",
+        basicDetails: "Detalhes básicos",
+        deleteAccount: "Excluir conta",
+        deleteAccountDescription:
+          "Exclua sua conta e todos os seus dados de origem. Isso é irreversível.",
+      },
       general: "Geral",
-      home: "Home",
-      schedule: "Agenda",
-      chat: "Chat",
       personal: "Pessoal",
-      assessments: "Avaliações",
       login: "Entrar",
       loginDescription: "Entrar na plataforma",
       email: "Email",
@@ -75,13 +99,6 @@ export const resources: Resource = {
       colorScheme: "Esquema de Cores",
       language: "Linguagem",
       languageChanged: "Linguagem alterada",
-      profile: {
-        title: "Perfil",
-        basicDetails: "Detalhes básicos",
-        deleteAccount: "Excluir conta",
-        deleteAccountDescription:
-          "Exclua sua conta e todos os seus dados de origem. Isso é irreversível.",
-      },
       users: "Usuários",
       change: "Alterar",
       edit: "Editar",

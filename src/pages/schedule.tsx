@@ -1,10 +1,9 @@
-import { AuthGuard, Layout } from "@components";
-import { Box, Card, Container, Typography } from "@mui/material";
+import { AuthGuard, Layout, Schedule } from "@components";
 import Head from "next/head";
 import { NextPageWithLayout } from "pages/_app";
 import { useTranslation } from "react-i18next";
 
-const Schedule: NextPageWithLayout = () => {
+const SchedulePage: NextPageWithLayout = () => {
   const { t } = useTranslation();
 
   return (
@@ -12,39 +11,15 @@ const Schedule: NextPageWithLayout = () => {
       <Head>
         <title>{t("schedule")} | SysGym</title>
       </Head>
-      <Box
-        component="main"
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          minHeight: "100%",
-        }}
-      >
-        <Container
-          maxWidth="sm"
-          sx={{
-            py: {
-              xs: "60px",
-              md: "120px",
-            },
-          }}
-        >
-          <Card
-            elevation={16}
-            sx={{ p: 4, display: "flex", justifyContent: "center" }}
-          >
-            <Typography>{t("schedule")}</Typography>
-          </Card>
-        </Container>
-      </Box>
+      <Schedule />
     </>
   );
 };
 
-Schedule.getLayout = (page) => (
+SchedulePage.getLayout = (page) => (
   <AuthGuard>
     <Layout>{page}</Layout>
   </AuthGuard>
 );
 
-export default Schedule;
+export default SchedulePage;

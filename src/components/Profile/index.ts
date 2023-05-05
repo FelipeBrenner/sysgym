@@ -1,1 +1,1 @@
-export * from "./ProfileGeneral";
+export * from "./Profile";

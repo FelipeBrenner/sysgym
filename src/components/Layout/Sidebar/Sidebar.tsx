@@ -36,17 +36,17 @@ const getSections = (t: TFunction): Section[] => [
     title: t("general"),
     items: [
       {
-        title: t("home"),
+        title: t("home.title"),
         path: "/",
         icon: <HomeIcon fontSize="small" />,
       },
       {
-        title: t("schedule"),
+        title: t("schedule.title"),
         path: "/schedule",
         icon: <CalendarMonthIcon fontSize="small" />,
       },
       {
-        title: t("chat"),
+        title: t("chat.title"),
         path: "/chat",
         icon: <ForumIcon fontSize="small" />,
       },
@@ -61,7 +61,7 @@ const getSections = (t: TFunction): Section[] => [
         icon: <AccountCircleIcon fontSize="small" />,
       },
       {
-        title: t("assessments"),
+        title: t("assessments.title"),
         path: "/assessments",
         icon: <AssessmentIcon fontSize="small" />,
       },

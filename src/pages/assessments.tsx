@@ -1,10 +1,9 @@
-import { AuthGuard, Layout } from "@components";
-import { Box, Card, Container, Typography } from "@mui/material";
+import { Assessments, AuthGuard, Layout } from "@components";
 import Head from "next/head";
 import { NextPageWithLayout } from "pages/_app";
 import { useTranslation } from "react-i18next";
 
-const Assessments: NextPageWithLayout = () => {
+const AssessmentsPage: NextPageWithLayout = () => {
   const { t } = useTranslation();
 
   return (
@@ -12,39 +11,15 @@ const Assessments: NextPageWithLayout = () => {
       <Head>
         <title>{t("assessments")} | SysGym</title>
       </Head>
-      <Box
-        component="main"
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          minHeight: "100%",
-        }}
-      >
-        <Container
-          maxWidth="sm"
-          sx={{
-            py: {
-              xs: "60px",
-              md: "120px",
-            },
-          }}
-        >
-          <Card
-            elevation={16}
-            sx={{ p: 4, display: "flex", justifyContent: "center" }}
-          >
-            <Typography>{t("assessments")}</Typography>
-          </Card>
-        </Container>
-      </Box>
+      <Assessments />
     </>
   );
 };
 
-Assessments.getLayout = (page) => (
+AssessmentsPage.getLayout = (page) => (
   <AuthGuard>
     <Layout>{page}</Layout>
   </AuthGuard>
 );
 
-export default Assessments;
+export default AssessmentsPage;
