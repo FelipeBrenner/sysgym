@@ -9,7 +9,7 @@ const AssessmentsPage: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>{t("assessments")} | SysGym</title>
+        <title>{t("assessments.title")} | SysGym</title>
       </Head>
       <Assessments />
     </>

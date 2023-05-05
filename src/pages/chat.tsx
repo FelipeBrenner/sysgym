@@ -9,7 +9,7 @@ const ChatPage: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>{t("chat")} | SysGym</title>
+        <title>{t("chat.title")} | SysGym</title>
       </Head>
       <Chat />
     </>

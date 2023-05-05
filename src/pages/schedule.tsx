@@ -9,7 +9,7 @@ const SchedulePage: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>{t("schedule")} | SysGym</title>
+        <title>{t("schedule.title")} | SysGym</title>
       </Head>
       <Schedule />
     </>
