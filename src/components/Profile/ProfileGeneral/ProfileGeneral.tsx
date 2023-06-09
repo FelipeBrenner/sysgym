@@ -1,5 +1,6 @@
 import { useAuth } from "@hooks";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { LoadingButton } from "@mui/lab";
 import {
   Avatar,
   Box,
@@ -10,11 +11,20 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export const ProfileGeneral = ({ ...props }) => {
   const { t } = useTranslation();
-  const { user } = useAuth();
+  const { user, updateUser } = useAuth();
+  const [name, setName] = useState(user?.name);
+  const [isLoadingSaveName, setIsLoadingSaveName] = useState(false);
+
+  const handleSaveName = async () => {
+    setIsLoadingSaveName(true);
+    await updateUser({ name });
+    setIsLoadingSaveName(false);
+  };
 
   return (
     <Box sx={{ mt: 4 }} {...props}>
@@ -51,15 +61,22 @@ export const ProfileGeneral = ({ ...props }) => {
                 }}
               >
                 <TextField
-                  defaultValue={user?.name}
-                  label="Full Name"
+                  value={name}
+                  label="Name"
                   size="small"
                   sx={{
                     flexGrow: 1,
                     mr: 3,
                   }}
+                  onChange={(event) => setName(event.target.value)}
                 />
-                <Button>{t("save")}</Button>
+                <LoadingButton
+                  disabled={name === user?.name}
+                  onClick={handleSaveName}
+                  loading={isLoadingSaveName}
+                >
+                  {t("save")}
+                </LoadingButton>
               </Box>
               <Box
                 sx={{
@@ -84,23 +101,6 @@ export const ProfileGeneral = ({ ...props }) => {
                 />
                 <Button>{t("edit")}</Button>
               </Box>
-            </Grid>
-          </Grid>
-        </CardContent>
-      </Card>
-      <Card sx={{ mt: 4 }}>
-        <CardContent>
-          <Grid container spacing={3}>
-            <Grid item md={4} xs={12}>
-              <Typography variant="h6">{t("profile.deleteAccount")}</Typography>
-            </Grid>
-            <Grid item md={8} xs={12}>
-              <Typography sx={{ mb: 3 }} variant="subtitle1">
-                {t("profile.deleteAccountDescription")}
-              </Typography>
-              <Button color="error" variant="outlined">
-                {t("profile.deleteAccount")}
-              </Button>
             </Grid>
           </Grid>
         </CardContent>

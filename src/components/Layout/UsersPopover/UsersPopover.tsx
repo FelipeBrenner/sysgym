@@ -1,6 +1,8 @@
-import { useDatabase } from "@hooks";
+import { usersDatabase } from "@database";
 import { Avatar, Popover, Typography } from "@mui/material";
+import { IUser } from "@types";
 import NextLink from "next/link";
+import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import * as Styles from "./UsersPopover.styles";
 
@@ -17,7 +19,16 @@ export const UsersPopover = ({
   ...other
 }: UsersPopoverProps) => {
   const { t } = useTranslation();
-  const { users } = useDatabase();
+  const [users, setUsers] = useState<IUser[]>([]);
+
+  useLayoutEffect(() => {
+    const loadUsers = async () => {
+      const users = await usersDatabase.getUsers();
+      setUsers(users);
+    };
+
+    loadUsers();
+  }, [open]);
 
   return (
     <Popover

@@ -1,33 +1,40 @@
 import { db } from "@services";
-import { User } from "@types";
+import { IUser } from "@types";
 import {
-  addDoc,
   collection,
   doc,
   getDocs,
   query,
+  setDoc,
   updateDoc,
   where,
 } from "firebase/firestore";
 
-const usersCollectionRef = collection(db, "users");
+const usersCollection = collection(db, "users");
 
 export const getUser = async (id: string) => {
-  const q = query(usersCollectionRef, where("id", "==", id));
+  const q = query(usersCollection, where("id", "==", id));
   const data = await getDocs(q);
-  return data.docs.map((doc) => doc.data())[0] as User;
+  return data.docs.map((doc) => doc.data())[0] as IUser;
 };
 
 export const getUsers = async () => {
-  const data = await getDocs(usersCollectionRef);
-  return data.docs.map((doc) => doc.data()) as User[];
+  const data = await getDocs(usersCollection);
+  return data.docs.map((doc) => doc.data()) as IUser[];
 };
 
-export const createUser = async (user: User) => {
-  await addDoc(usersCollectionRef, user);
+export const createUser = async (user: IUser) => {
+  await setDoc(doc(db, "users", user.id), user);
 };
 
-export const updateUser = async (user: User) => {
+export const updateUser = async (user: IUser) => {
   const userDoc = doc(db, "users", user.id);
   await updateDoc(userDoc, user);
+};
+
+export const usersDatabase = {
+  getUser,
+  getUsers,
+  createUser,
+  updateUser,
 };
