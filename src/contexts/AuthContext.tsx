@@ -55,27 +55,38 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [isInitialized, setIsInitialized] = useState(false);
   const [user, setUser] = useState<IUser | null>(null);
 
-  const updateUser = async ({
-    name = user?.name ?? "",
-    avatar = user?.avatar ?? "",
-  }: IUpdateUserProps) => {
+  const updateUser = async ({ name, avatar }: IUpdateUserProps) => {
     if (auth.currentUser && user) {
       try {
-        await updateProfile(auth.currentUser, {
-          displayName: name,
-          photoURL: avatar,
-        });
+        if (name) {
+          await updateProfile(auth.currentUser, {
+            displayName: name,
+          });
 
-        const updatedUser = {
-          ...user,
-          name,
-          avatar,
-        };
+          const updatedUser = {
+            ...user,
+            name,
+          };
 
-        await usersDatabase.updateUser(updatedUser);
+          await usersDatabase.updateUser(updatedUser);
+          setUser(updatedUser);
+          toast.success("Nome alterado com sucesso!");
+        }
 
-        setUser(updatedUser);
-        toast.success("Nome alterado com sucesso!");
+        if (avatar) {
+          await updateProfile(auth.currentUser, {
+            photoURL: avatar,
+          });
+
+          const updatedUser = {
+            ...user,
+            avatar,
+          };
+
+          await usersDatabase.updateUser(updatedUser);
+          setUser(updatedUser);
+          toast.success("Imagem alterada com sucesso!");
+        }
       } catch (error) {
         toast.error("Erro ao alterar o nome!");
         console.error(error);

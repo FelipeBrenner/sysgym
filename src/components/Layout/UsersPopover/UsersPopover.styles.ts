@@ -1,5 +1,6 @@
 import {
   Button,
+  Avatar as MuiAvatar,
   List as MuiList,
   ListItem as MuiListItem,
 } from "@mui/material";
@@ -26,4 +27,9 @@ export const UserButton = styled(Button)(({ theme }) => ({
     backgroundColor: theme.palette.action.hover,
   },
   flexWrap: "nowrap",
+}));
+
+export const Avatar = styled(MuiAvatar)(({ theme }) => ({
+  fontSize: `${theme.typography.body2.fontSize} !important`,
+  cursor: "pointer",
 }));

@@ -1,6 +1,7 @@
 import { usersDatabase } from "@database";
-import { Avatar, Popover, Typography } from "@mui/material";
+import { Popover, Typography } from "@mui/material";
 import { IUser } from "@types";
+import { getUserAcronym } from "@utils";
 import NextLink from "next/link";
 import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -55,7 +56,9 @@ export const UsersPopover = ({
             <Styles.UserButton
               LinkComponent={NextLink}
               startIcon={
-                <Avatar src={user.avatar} sx={{ cursor: "pointer" }} />
+                <Styles.Avatar src={user.avatar}>
+                  {getUserAcronym(user?.name, user?.email)}
+                </Styles.Avatar>
               }
             >
               {user.name}
