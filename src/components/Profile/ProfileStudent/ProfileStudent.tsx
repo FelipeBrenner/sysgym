@@ -39,6 +39,7 @@ export const ProfileStudent = () => {
       const enrollment = await enrollmentsDatabase.getEnrollment(user?.id);
       const formatEnrollment = {
         id: user?.id ?? "",
+        cpf: user?.cpf ?? "",
         date: enrollment?.date ?? null,
         plan: enrollment?.plan,
         observation: enrollment?.observation,

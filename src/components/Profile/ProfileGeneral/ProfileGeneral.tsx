@@ -119,7 +119,7 @@ export const ProfileGeneral = () => {
                 <Grid item md={12} xs={12}>
                   <TextField
                     value={name}
-                    label="Name"
+                    label="Nome"
                     size="small"
                     onChange={(event) => setName(event.target.value)}
                     fullWidth
