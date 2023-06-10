@@ -7,7 +7,6 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  Stack,
   TextField,
   Typography,
 } from "@mui/material";
@@ -116,43 +115,52 @@ export const ProfileGeneral = () => {
                   />
                 </LoadingButton>
               </Styles.AvatarContainer>
-              <Stack spacing={3}>
-                <TextField
-                  value={name}
-                  label="Name"
-                  size="small"
-                  onChange={(event) => setName(event.target.value)}
-                />
-                <Styles.InputCpf
-                  value={formatCpf(cpf)}
-                  label="CPF"
-                  size="small"
-                  onChange={(event) => setCpf(formatCpf(event.target.value))}
-                />
-                <FormControl size="small">
-                  <InputLabel>Tipo</InputLabel>
-                  <Select
-                    label="Tipo"
-                    value={type}
-                    onChange={(event) =>
-                      setType(event.target.value as TUserType)
-                    }
+              <Grid container spacing={3}>
+                <Grid item md={12} xs={12}>
+                  <TextField
+                    value={name}
+                    label="Name"
                     size="small"
-                  >
-                    {typeOptions.map((option) => (
-                      <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-                <Styles.InputEmail
-                  defaultValue={user?.email}
-                  disabled
-                  label="Email"
-                  size="small"
-                />
-              </Stack>
+                    onChange={(event) => setName(event.target.value)}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item md={6} xs={12}>
+                  <Styles.InputCpf
+                    value={formatCpf(cpf)}
+                    label="CPF"
+                    size="small"
+                    onChange={(event) => setCpf(formatCpf(event.target.value))}
+                  />
+                </Grid>
+                <Grid item md={6} xs={12}>
+                  <FormControl size="small" fullWidth>
+                    <InputLabel>Tipo</InputLabel>
+                    <Select
+                      label="Tipo"
+                      value={type}
+                      onChange={(event) =>
+                        setType(event.target.value as TUserType)
+                      }
+                      size="small"
+                    >
+                      {typeOptions.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.label}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid item md={12} xs={12}>
+                  <Styles.InputEmail
+                    defaultValue={user?.email}
+                    disabled
+                    label="Email"
+                    size="small"
+                  />
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         </CardContent>

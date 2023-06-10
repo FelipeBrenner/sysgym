@@ -1,0 +1,190 @@
+import { useAuth } from "@hooks";
+import { LoadingButton } from "@mui/lab";
+import {
+  Box,
+  CardContent,
+  CircularProgress,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { IEnrollment, TUserType } from "@types";
+import { enrollmentsDatabase } from "database/enrollments";
+import dayjs from "dayjs";
+import { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
+import { useTranslation } from "react-i18next";
+import * as Styles from "./ProfileStudent.styles";
+
+export type TTypeOptions = {
+  label: string;
+  value: TUserType;
+};
+
+export const ProfileStudent = () => {
+  const { t } = useTranslation();
+  const { user } = useAuth();
+  const [enrollment, setEnrollment] = useState<IEnrollment>();
+  const [savedEnrollment, setSavedEnrollment] = useState<IEnrollment>();
+  const [isLoadingSave, setIsLoadingSave] = useState(false);
+
+  useEffect(() => {
+    const loadEnrollment = async () => {
+      const enrollment = await enrollmentsDatabase.getEnrollment(user?.cpf);
+      const formatEnrollment = {
+        cpf: user?.cpf ?? "",
+        date: enrollment?.date ?? null,
+        plan: enrollment?.plan,
+        observation: enrollment?.observation,
+      };
+
+      setEnrollment(formatEnrollment);
+      setSavedEnrollment(formatEnrollment);
+    };
+
+    loadEnrollment();
+  }, []);
+
+  const planOptions = [
+    {
+      label: "1 x R$100,00",
+      value: "1x100",
+    },
+    {
+      label: "3 x R$95,00",
+      value: "3x95",
+    },
+    {
+      label: "6 x R$90,00",
+      value: "6x90",
+    },
+    {
+      label: "12 x R$85,00",
+      value: "12x85",
+    },
+  ];
+
+  const handleSave = async () => {
+    try {
+      if (enrollment) {
+        setIsLoadingSave(true);
+        const formatEnrollment = {
+          ...enrollment,
+          date: enrollment?.date?.toString() ?? null,
+        };
+        enrollmentsDatabase.createEnrollment(formatEnrollment).then(() => {
+          toast.success("Matrícula criada com sucesso!");
+          setSavedEnrollment(formatEnrollment);
+          setIsLoadingSave(false);
+        });
+      }
+    } catch (error) {
+      toast.error("Erro ao alterar a imagem!");
+      console.error(error);
+      setIsLoadingSave(false);
+    }
+  };
+
+  const hasChanged =
+    JSON.stringify(enrollment) !== JSON.stringify(savedEnrollment);
+
+  return (
+    <>
+      <Styles.Card>
+        <CardContent>
+          <Grid container spacing={3}>
+            <Grid item md={4} xs={12}>
+              <Typography variant="h6">Matrícula</Typography>
+            </Grid>
+            <Grid item md={8} xs={12}>
+              {enrollment ? (
+                <Grid container spacing={3}>
+                  <Grid item md={12} xs={12}>
+                    <FormControl size="small" fullWidth>
+                      <InputLabel>Plano</InputLabel>
+                      <Select
+                        label="Plano"
+                        value={enrollment.plan}
+                        onChange={(event) =>
+                          setEnrollment({
+                            ...enrollment,
+                            plan: event.target.value,
+                          })
+                        }
+                        size="small"
+                      >
+                        {planOptions.map((option) => (
+                          <MenuItem key={option.value} value={option.value}>
+                            {option.label}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                  <Grid item md={4} xs={12}>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <DatePicker
+                        label="Data inicial"
+                        onChange={(date) =>
+                          setEnrollment({
+                            ...enrollment,
+                            date: date ? date.toString() : null,
+                          })
+                        }
+                        value={enrollment.date ? dayjs(enrollment.date) : null}
+                        format="DD/MM/YYYY"
+                        sx={{ width: "100%" }}
+                      />
+                    </LocalizationProvider>
+                  </Grid>
+                  <Grid item md={8} xs={12}>
+                    <TextField
+                      value={enrollment.observation}
+                      label="Observação"
+                      size="small"
+                      onChange={(event) =>
+                        setEnrollment({
+                          ...enrollment,
+                          observation: event.target.value,
+                        })
+                      }
+                      multiline
+                      minRows={4}
+                      fullWidth
+                    />
+                  </Grid>
+                </Grid>
+              ) : (
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <CircularProgress />
+                </Box>
+              )}
+            </Grid>
+          </Grid>
+        </CardContent>
+      </Styles.Card>
+      <Styles.ButtonContainer>
+        <LoadingButton
+          variant="contained"
+          loading={isLoadingSave}
+          type="submit"
+          disabled={!hasChanged}
+          onClick={handleSave}
+        >
+          {t("save")}
+        </LoadingButton>
+      </Styles.ButtonContainer>
+    </>
+  );
+};

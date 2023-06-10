@@ -24,6 +24,7 @@ export const Avatar = styled(MuiAvatar)(({ theme }) => ({
 }));
 
 export const InputCpf = styled(TextField)(({ theme }) => ({
+  width: "100%",
   "input::-webkit-outer-spin-button, input::-webkit-inner-spin-button": {
     WebkitAppearance: "none",
     margin: 0,
@@ -34,6 +35,7 @@ export const InputCpf = styled(TextField)(({ theme }) => ({
 }));
 
 export const InputEmail = styled(TextField)(({ theme }) => ({
+  width: "100%",
   "& .MuiOutlinedInput-notchedOutline": {
     borderStyle: "dashed",
   },
