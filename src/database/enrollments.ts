@@ -6,29 +6,22 @@ import {
   getDocs,
   query,
   setDoc,
-  updateDoc,
   where,
 } from "firebase/firestore";
 
 const enrollmentsCollection = collection(db, "enrollments");
 
-export const getEnrollment = async (cpf?: string) => {
-  const q = query(enrollmentsCollection, where("cpf", "==", cpf));
+export const getEnrollment = async (id?: string) => {
+  const q = query(enrollmentsCollection, where("id", "==", id));
   const data = await getDocs(q);
   return data.docs.map((doc) => doc.data())[0];
 };
 
-export const createEnrollment = async (enrollment: IEnrollment) => {
-  await setDoc(doc(db, "enrollments", enrollment.cpf), enrollment);
-};
-
 export const updateEnrollment = async (enrollment: IEnrollment) => {
-  const enrollmentDoc = doc(db, "enrollments", enrollment.cpf);
-  await updateDoc(enrollmentDoc, enrollment);
+  await setDoc(doc(db, "enrollments", enrollment.id), enrollment);
 };
 
 export const enrollmentsDatabase = {
   getEnrollment,
-  createEnrollment,
   updateEnrollment,
 };

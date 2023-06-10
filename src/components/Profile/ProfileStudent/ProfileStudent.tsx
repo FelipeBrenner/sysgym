@@ -36,9 +36,9 @@ export const ProfileStudent = () => {
 
   useEffect(() => {
     const loadEnrollment = async () => {
-      const enrollment = await enrollmentsDatabase.getEnrollment(user?.cpf);
+      const enrollment = await enrollmentsDatabase.getEnrollment(user?.id);
       const formatEnrollment = {
-        cpf: user?.cpf ?? "",
+        id: user?.id ?? "",
         date: enrollment?.date ?? null,
         plan: enrollment?.plan,
         observation: enrollment?.observation,
@@ -78,8 +78,8 @@ export const ProfileStudent = () => {
           ...enrollment,
           date: enrollment?.date?.toString() ?? null,
         };
-        enrollmentsDatabase.createEnrollment(formatEnrollment).then(() => {
-          toast.success("Matrícula criada com sucesso!");
+        enrollmentsDatabase.updateEnrollment(formatEnrollment).then(() => {
+          toast.success("Matrícula atualizada com sucesso!");
           setSavedEnrollment(formatEnrollment);
           setIsLoadingSave(false);
         });
@@ -119,6 +119,9 @@ export const ProfileStudent = () => {
                         }
                         size="small"
                       >
+                        <MenuItem value="">
+                          <em>Nenhum</em>
+                        </MenuItem>
                         {planOptions.map((option) => (
                           <MenuItem key={option.value} value={option.value}>
                             {option.label}

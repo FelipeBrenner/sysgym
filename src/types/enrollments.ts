@@ -1,5 +1,5 @@
 export interface IEnrollment {
-  cpf: string;
+  id: string;
   date?: string | null;
   plan?: string;
   observation?: string;

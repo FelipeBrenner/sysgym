@@ -16,7 +16,7 @@ export const Profile = () => {
     {
       label: "Aluno",
       value: "student",
-      disabled: user?.type !== "aluno" || !user?.cpf,
+      disabled: user?.type !== "aluno",
     },
   ];
 
