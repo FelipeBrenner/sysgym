@@ -10,9 +10,10 @@ export const Card = styled(MuiCard)(({ theme }) => ({
   marginTop: theme.spacing(2),
 }));
 
-export const Box = styled(MuiBox)(({ theme }) => ({
+export const AvatarContainer = styled(MuiBox)(({ theme }) => ({
   alignItems: "center",
   display: "flex",
+  marginBottom: theme.spacing(3),
 }));
 
 export const Avatar = styled(MuiAvatar)(({ theme }) => ({
@@ -22,15 +23,25 @@ export const Avatar = styled(MuiAvatar)(({ theme }) => ({
   fontSize: theme.typography.h5.fontSize,
 }));
 
-export const InputName = styled(TextField)(({ theme }) => ({
-  flexGrow: 1,
-  marginRight: theme.spacing(3),
+export const InputCpf = styled(TextField)(({ theme }) => ({
+  "input::-webkit-outer-spin-button, input::-webkit-inner-spin-button": {
+    WebkitAppearance: "none",
+    margin: 0,
+  },
+  "input[type=number]": {
+    MozAppearance: "textField",
+  },
 }));
 
 export const InputEmail = styled(TextField)(({ theme }) => ({
-  flexGrow: 1,
-  marginRight: theme.spacing(3),
   "& .MuiOutlinedInput-notchedOutline": {
     borderStyle: "dashed",
   },
+}));
+
+export const ButtonContainer = styled(MuiBox)(({ theme }) => ({
+  display: "flex",
+  width: "100%",
+  justifyContent: "end",
+  marginTop: theme.spacing(3),
 }));

@@ -1,6 +1,6 @@
 import { usersDatabase } from "@database";
 import { firebaseApp } from "@services";
-import { IUser } from "@types";
+import { IUser, TUserType } from "@types";
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
@@ -17,8 +17,10 @@ import { toast } from "react-hot-toast";
 const auth = getAuth(firebaseApp);
 
 export interface IUpdateUserProps {
-  name?: string;
   avatar?: string;
+  name?: string;
+  cpf?: string;
+  type?: TUserType;
 }
 
 export interface AuthContextValue {
@@ -55,40 +57,26 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [isInitialized, setIsInitialized] = useState(false);
   const [user, setUser] = useState<IUser | null>(null);
 
-  const updateUser = async ({ name, avatar }: IUpdateUserProps) => {
+  const updateUser = async (props: IUpdateUserProps) => {
     if (auth.currentUser && user) {
       try {
-        if (name) {
-          await updateProfile(auth.currentUser, {
-            displayName: name,
-          });
+        const { name, avatar } = props;
 
-          const updatedUser = {
-            ...user,
-            name,
-          };
+        await updateProfile(auth.currentUser, {
+          displayName: name,
+          photoURL: avatar,
+        });
 
-          await usersDatabase.updateUser(updatedUser);
-          setUser(updatedUser);
-          toast.success("Nome alterado com sucesso!");
-        }
+        const updatedUser = {
+          ...user,
+          ...props,
+        };
 
-        if (avatar) {
-          await updateProfile(auth.currentUser, {
-            photoURL: avatar,
-          });
-
-          const updatedUser = {
-            ...user,
-            avatar,
-          };
-
-          await usersDatabase.updateUser(updatedUser);
-          setUser(updatedUser);
-          toast.success("Imagem alterada com sucesso!");
-        }
+        await usersDatabase.updateUser(updatedUser);
+        setUser(updatedUser);
+        toast.success("Usuário atualizado com sucesso!");
       } catch (error) {
-        toast.error("Erro ao alterar o nome!");
+        toast.error("Erro ao atualizar o usuário!");
         console.error(error);
       }
     }
@@ -109,6 +97,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
               avatar: user.photoURL || "",
               email: user.email || "",
               name: user.displayName || "",
+              cpf: "",
+              type: "aluno",
             };
 
             usersDatabase.createUser(newUser);
