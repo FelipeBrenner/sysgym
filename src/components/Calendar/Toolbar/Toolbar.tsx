@@ -103,7 +103,7 @@ export const Toolbar: FC<Props> = ({
           }}
           variant="contained"
         >
-          Novo Evento
+          Nova Atividade
         </Button>
       </Box>
     </Box>

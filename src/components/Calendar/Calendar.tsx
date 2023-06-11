@@ -166,7 +166,7 @@ export const Calendar = () => {
         start: event.start?.getTime(),
         end: event.end?.getTime(),
       });
-      toast.success("Evento atualizado!");
+      toast.success("Atividade atualizada!");
     } catch (err) {
       console.error(err);
     }

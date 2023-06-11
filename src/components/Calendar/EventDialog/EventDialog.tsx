@@ -121,14 +121,14 @@ export const EventDialog: FC<Props> = ({
 
         if (event) {
           await eventsDatabase.updateEvent(event.id, data);
-          toast.success("Evento atualizado!");
+          toast.success("Atividade atualizado!");
         } else {
           await eventsDatabase.setEvent({
             id: uuidv4(),
             userId: user!.id,
             ...data,
           });
-          toast.success("Evento adicionado!");
+          toast.success("Atividade adicionado!");
         }
 
         if (!event && onAddComplete) {
@@ -192,7 +192,7 @@ export const EventDialog: FC<Props> = ({
       <form onSubmit={formik.handleSubmit}>
         <Box sx={{ p: 3 }}>
           <Typography align="center" gutterBottom variant="h3">
-            {event ? "Editar Evento" : "Adicionar Evento"}
+            {event ? "Editar Atividade" : "Adicionar Atividade"}
           </Typography>
         </Box>
         <Box sx={{ p: 3 }}>
