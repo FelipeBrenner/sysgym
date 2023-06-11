@@ -8,18 +8,18 @@ import {
   Divider,
   FormControlLabel,
   FormHelperText,
+  Grid,
   IconButton,
   Switch,
   TextField,
   Typography,
 } from "@mui/material";
-import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { ICalendarEvent } from "@types";
-import { addMinutes } from "date-fns";
 import dayjs from "dayjs";
+import "dayjs/locale/pt-br";
 import { useFormik } from "formik";
-import PropTypes from "prop-types";
 import { FC, ReactNode, useMemo } from "react";
 import toast from "react-hot-toast";
 import { v4 as uuidv4 } from "uuid";
@@ -45,27 +45,26 @@ interface FormValues {
   submit: string | null;
 }
 
-export const EventDialog: FC<Props> = (props) => {
-  const {
-    event,
-    onAddComplete,
-    onClose,
-    onDeleteComplete,
-    onEditComplete,
-    open,
-    range,
-  } = props;
+export const EventDialog: FC<Props> = ({
+  event,
+  onAddComplete,
+  onClose,
+  onDeleteComplete,
+  onEditComplete,
+  open,
+  range,
+}) => {
   const { user } = useAuth();
 
   const initialValues = useMemo((): FormValues => {
     if (event) {
       return {
-        allDay: event.allDay || false,
+        allDay: event.allDay,
         color: event.color ?? "",
-        description: event.description || "",
-        end: event.end ? new Date(event.end) : addMinutes(new Date(), 30),
-        start: event.start ? new Date(event.start) : new Date(),
-        title: event.title || "",
+        description: event.description,
+        end: new Date(event.end),
+        start: new Date(event.start),
+        title: event.title,
         submit: null,
       };
     }
@@ -82,16 +81,24 @@ export const EventDialog: FC<Props> = (props) => {
       };
     }
 
+    const start = new Date();
+    start.setMinutes(0);
+    start.setHours(start.getHours() + 1);
+    const end = new Date();
+    end.setMinutes(0);
+    end.setHours(end.getHours() + 2);
+
     return {
       allDay: false,
       color: "",
       description: "",
-      end: addMinutes(new Date(), 30),
-      start: new Date(),
+      end,
+      start,
       title: "",
       submit: null,
     };
   }, [event, range]);
+
   const formik = useFormik({
     enableReinitialize: true,
     initialValues,
@@ -131,6 +138,8 @@ export const EventDialog: FC<Props> = (props) => {
         if (event && onEditComplete) {
           onEditComplete();
         }
+
+        helpers.resetForm();
       } catch (error) {
         let message;
 
@@ -142,6 +151,7 @@ export const EventDialog: FC<Props> = (props) => {
         helpers.setStatus({ success: false });
         helpers.setErrors({ submit: message });
         helpers.setSubmitting(false);
+        helpers.resetForm();
       }
     },
   });
@@ -224,30 +234,35 @@ export const EventDialog: FC<Props> = (props) => {
               label="Dia inteiro"
             />
           </Box>
-          <Box sx={{ mt: 2 }}>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker
-                label="Data inicial"
-                onChange={(date) =>
-                  handleStartDateChange(date ? date.toDate() : null)
-                }
-                value={formik.values.start ? dayjs(formik.values.start) : null}
-                format="DD/MM/YYYY"
-              />
-            </LocalizationProvider>
-          </Box>
-          <Box sx={{ mt: 2 }}>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker
-                label="Data final"
-                onChange={(date) =>
-                  handleEndDateChange(date ? date.toDate() : null)
-                }
-                value={formik.values.end ? dayjs(formik.values.end) : null}
-                format="DD/MM/YYYY"
-              />
-            </LocalizationProvider>
-          </Box>
+          <LocalizationProvider
+            dateAdapter={AdapterDayjs}
+            adapterLocale="pt-br"
+          >
+            <Grid container spacing={2} mt={1}>
+              <Grid item md={6} xs={12}>
+                <DateTimePicker
+                  label="Data inicial"
+                  onChange={(date) =>
+                    handleStartDateChange(date ? date.toDate() : null)
+                  }
+                  value={
+                    formik.values.start ? dayjs(formik.values.start) : null
+                  }
+                  sx={{ width: "100%" }}
+                />
+              </Grid>
+              <Grid item md={6} xs={12}>
+                <DateTimePicker
+                  label="Data final"
+                  onChange={(date) =>
+                    handleEndDateChange(date ? date.toDate() : null)
+                  }
+                  value={formik.values.end ? dayjs(formik.values.end) : null}
+                  sx={{ width: "100%" }}
+                />
+              </Grid>
+            </Grid>
+          </LocalizationProvider>
           {Boolean(formik.touched.end && formik.errors.end) && (
             <Box sx={{ mt: 2 }}>
               <FormHelperText error>
@@ -284,16 +299,4 @@ export const EventDialog: FC<Props> = (props) => {
       </form>
     </Dialog>
   );
-};
-
-EventDialog.propTypes = {
-  // @ts-ignore
-  event: PropTypes.object,
-  onAddComplete: PropTypes.func,
-  onClose: PropTypes.func,
-  onDeleteComplete: PropTypes.func,
-  onEditComplete: PropTypes.func,
-  open: PropTypes.bool,
-  // @ts-ignore
-  range: PropTypes.object,
 };

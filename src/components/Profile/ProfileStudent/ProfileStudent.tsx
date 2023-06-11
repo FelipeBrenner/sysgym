@@ -17,6 +17,7 @@ import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { IEnrollment, TUserType } from "@types";
 import dayjs from "dayjs";
+import "dayjs/locale/pt-br";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
@@ -132,7 +133,10 @@ export const ProfileStudent = () => {
                     </FormControl>
                   </Grid>
                   <Grid item md={4} xs={12}>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <LocalizationProvider
+                      dateAdapter={AdapterDayjs}
+                      adapterLocale="pt-br"
+                    >
                       <DatePicker
                         label="Data inicial"
                         onChange={(date) =>

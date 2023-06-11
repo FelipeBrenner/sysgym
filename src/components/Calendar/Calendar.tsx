@@ -8,8 +8,8 @@ import FullCalendar, {
   EventClickArg,
   EventDropArg,
 } from "@fullcalendar/react";
-import { Container, Theme, useMediaQuery } from "@mui/material";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { Container } from "@mui/material";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { COLORS } from "@constants";
@@ -23,7 +23,6 @@ import { Toolbar } from "./Toolbar/Toolbar";
 export const Calendar = () => {
   const { t } = useTranslation();
   const calendarRef = useRef<FullCalendar | null>(null);
-  const smDown = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
   const [date, setDate] = useState<Date>(new Date());
   const [dialog, setDialog] = useState<any>({
     isOpen: false,
@@ -86,21 +85,6 @@ export const Calendar = () => {
     setFilteredEvents(events);
   }, [events]);
 
-  const handleResize = useCallback(() => {
-    const calendarEl = calendarRef.current;
-
-    if (calendarEl) {
-      const calendarElApi = calendarEl.getApi();
-      const newView = smDown ? "timeGridDay" : "dayGridMonth";
-
-      calendarElApi.changeView(newView);
-    }
-  }, [calendarRef, smDown]);
-
-  useEffect(() => {
-    handleResize();
-  }, [smDown]);
-
   const handleDateToday = (): void => {
     const calendarEl = calendarRef.current;
 
@@ -149,11 +133,17 @@ export const Calendar = () => {
       calendarElApi.unselect();
     }
 
+    const start = new Date(arg.start);
+    start.setHours(new Date().getHours() + 1);
+    const end = new Date(arg.end);
+    end.setDate(end.getDate() - 1);
+    end.setHours(new Date().getHours() + 2);
+
     setDialog({
       isOpen: true,
       range: {
-        start: arg.start.getTime(),
-        end: arg.end.getTime(),
+        start,
+        end,
       },
     });
   };
