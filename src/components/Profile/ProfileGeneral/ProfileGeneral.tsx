@@ -1,6 +1,7 @@
 import { useAuth } from "@hooks";
 import { LoadingButton } from "@mui/lab";
 import {
+  Button,
   CardContent,
   FormControl,
   Grid,
@@ -67,6 +68,15 @@ export const ProfileGeneral = () => {
         console.error(error);
         setIsLoadingChangeAvatar(false);
       }
+    }
+  };
+
+  const handleCancel = async () => {
+    if (user) {
+      setAvatar(user.avatar);
+      setName(user.name);
+      setCpf(user.cpf ?? "");
+      setType(user.type!);
     }
   };
 
@@ -166,12 +176,16 @@ export const ProfileGeneral = () => {
         </CardContent>
       </Styles.Card>
       <Styles.ButtonContainer>
+        <Button onClick={handleCancel} disabled={!hasChanged}>
+          Cancelar
+        </Button>
         <LoadingButton
           variant="contained"
           loading={isLoadingSave}
           type="submit"
           disabled={!hasChanged}
           onClick={handleSave}
+          sx={{ marginLeft: 2 }}
         >
           {t("save")}
         </LoadingButton>

@@ -3,6 +3,7 @@ import { useAuth } from "@hooks";
 import { LoadingButton } from "@mui/lab";
 import {
   Box,
+  Button,
   CardContent,
   CircularProgress,
   FormControl,
@@ -71,6 +72,10 @@ export const ProfileStudent = () => {
       value: "12x85",
     },
   ];
+
+  const handleCancel = async () => {
+    setEnrollment(savedEnrollment);
+  };
 
   const handleSave = async () => {
     try {
@@ -183,12 +188,16 @@ export const ProfileStudent = () => {
         </CardContent>
       </Styles.Card>
       <Styles.ButtonContainer>
+        <Button onClick={handleCancel} disabled={!hasChanged}>
+          Cancelar
+        </Button>
         <LoadingButton
           variant="contained"
           loading={isLoadingSave}
           type="submit"
           disabled={!hasChanged}
           onClick={handleSave}
+          sx={{ marginLeft: 2 }}
         >
           {t("save")}
         </LoadingButton>

@@ -67,7 +67,6 @@ export const Calendar = () => {
 
   useEffect(() => {
     const proccessEvents = async () => {
-      console.log("processando");
       const events = await eventsDatabase.getEventsByUser(user?.id);
 
       const eventsFormatted = events.map((event: any) => ({
