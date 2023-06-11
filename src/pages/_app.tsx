@@ -1,3 +1,8 @@
+import "@fullcalendar/react/dist/vdom";
+
+import "styles/common.css";
+import "styles/daygrid.css";
+
 import { Settings, SplashScreen } from "@components";
 import {
   AuthConsumer,

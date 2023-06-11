@@ -1,3 +1,4 @@
+import { enrollmentsDatabase } from "@database";
 import { useAuth } from "@hooks";
 import { LoadingButton } from "@mui/lab";
 import {
@@ -15,7 +16,6 @@ import {
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { IEnrollment, TUserType } from "@types";
-import { enrollmentsDatabase } from "database/enrollments";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
@@ -37,7 +37,7 @@ export const ProfileStudent = () => {
   useEffect(() => {
     const loadEnrollment = async () => {
       const enrollment = await enrollmentsDatabase.getEnrollment(user?.id);
-      const formatEnrollment = {
+      const enrollmentFormatted = {
         id: user?.id ?? "",
         cpf: user?.cpf ?? "",
         date: enrollment?.date ?? null,
@@ -45,8 +45,8 @@ export const ProfileStudent = () => {
         observation: enrollment?.observation,
       };
 
-      setEnrollment(formatEnrollment);
-      setSavedEnrollment(formatEnrollment);
+      setEnrollment(enrollmentFormatted);
+      setSavedEnrollment(enrollmentFormatted);
     };
 
     loadEnrollment();
@@ -75,13 +75,13 @@ export const ProfileStudent = () => {
     try {
       if (enrollment) {
         setIsLoadingSave(true);
-        const formatEnrollment = {
+        const enrollmentFormatted = {
           ...enrollment,
           date: enrollment?.date?.toString() ?? null,
         };
-        enrollmentsDatabase.updateEnrollment(formatEnrollment).then(() => {
+        enrollmentsDatabase.updateEnrollment(enrollmentFormatted).then(() => {
           toast.success("Matrícula atualizada com sucesso!");
-          setSavedEnrollment(formatEnrollment);
+          setSavedEnrollment(enrollmentFormatted);
           setIsLoadingSave(false);
         });
       }

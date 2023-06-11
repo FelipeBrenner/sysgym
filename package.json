@@ -9,15 +9,27 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@babel/preset-react": "^7.22.5",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@fullcalendar/common": "^5.10.1",
+    "@fullcalendar/core": "^5.10.1",
+    "@fullcalendar/daygrid": "^5.10.1",
+    "@fullcalendar/interaction": "^5.10.1",
+    "@fullcalendar/list": "^5.10.1",
+    "@fullcalendar/react": "^5.10.1",
+    "@fullcalendar/resource-timeline": "^5.11.0",
+    "@fullcalendar/timegrid": "^5.10.1",
+    "@fullcalendar/timeline": "^5.10.1",
     "@mui/icons-material": "^5.11.16",
     "@mui/lab": "^5.0.0-alpha.127",
     "@mui/material": "^5.12.0",
     "@mui/x-date-pickers": "^6.7.0",
+    "@types/moment": "^2.13.0",
     "@types/node": "18.15.11",
     "@types/react": "18.0.35",
     "@types/react-dom": "18.0.11",
+    "date-fns": "^2.30.0",
     "dayjs": "^1.11.8",
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
@@ -25,7 +37,9 @@
     "flag-icons": "^6.6.6",
     "formik": "^2.2.9",
     "i18next": "^22.4.14",
+    "moment": "^2.29.4",
     "next": "13.3.0",
+    "next-transpile-modules": "^10.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.4.0",
@@ -34,6 +48,10 @@
     "simplebar-react": "^3.2.4",
     "typescript": "5.0.4",
     "usehooks-ts": "^2.9.1",
+    "uuid": "^9.0.0",
     "yup": "^1.1.1"
+  },
+  "devDependencies": {
+    "@types/uuid": "^9.0.2"
   }
 }

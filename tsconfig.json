@@ -22,6 +22,7 @@
     ],
     "paths": {
       "@components": ["components/index.ts"],
+      "@constants": ["constants/index.ts"],
       "@contexts": ["contexts/index.ts"],
       "@hooks": ["hooks/index.ts"],
       "@services": ["services/index.ts"],
