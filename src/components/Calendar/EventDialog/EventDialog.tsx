@@ -125,7 +125,7 @@ export const EventDialog: FC<Props> = ({
         } else {
           await eventsDatabase.setEvent({
             id: uuidv4(),
-            resourceId: user!.id,
+            userId: user!.id,
             ...data,
           });
           toast.success("Evento adicionado!");

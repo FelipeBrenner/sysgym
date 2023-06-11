@@ -16,6 +16,7 @@ import { COLORS } from "@constants";
 import { eventsDatabase, updateEvent } from "@database";
 import { useAuth } from "@hooks";
 import { ICalendarEvent, IEventColor } from "@types";
+import { toast } from "react-hot-toast";
 import * as Styles from "./Calendar.styles";
 import { EventDialog } from "./EventDialog/EventDialog";
 import { Toolbar } from "./Toolbar/Toolbar";
@@ -67,7 +68,7 @@ export const Calendar = () => {
 
   useEffect(() => {
     const proccessEvents = async () => {
-      const events = await eventsDatabase.getEventsByUser(user?.id);
+      const events = await eventsDatabase.getEventsByUser(user?.id ?? "");
 
       const eventsFormatted = events.map((event: any) => ({
         ...event,
@@ -78,7 +79,7 @@ export const Calendar = () => {
     };
 
     proccessEvents();
-  }, [dialog.isOpen]);
+  }, [dialog.isOpen, user]);
 
   useEffect(() => {
     setFilteredEvents(events);
@@ -165,6 +166,7 @@ export const Calendar = () => {
         start: event.start?.getTime(),
         end: event.end?.getTime(),
       });
+      toast.success("Evento atualizado!");
     } catch (err) {
       console.error(err);
     }

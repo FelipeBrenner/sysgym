@@ -6,7 +6,7 @@ export interface ICalendarEvent {
   end: number;
   start: number;
   title: string;
-  resourceId: string;
+  userId: string;
 }
 
 export interface IEventColor {

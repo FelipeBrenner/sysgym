@@ -1,23 +1,25 @@
-import { AuthGuard, Home, Layout } from "@components";
+import { AuthGuard, Calendar, Layout } from "@components";
 import Head from "next/head";
 import { NextPageWithLayout } from "pages/_app";
-// The import order DOES MATTER here. If you change it, you'll get an error!
+import { useTranslation } from "react-i18next";
 
-const HomePage: NextPageWithLayout = () => {
+const SchedulePage: NextPageWithLayout = () => {
+  const { t } = useTranslation();
+
   return (
     <>
       <Head>
-        <title>SysGym</title>
+        <title>{t("schedule.title")} | SysGym</title>
       </Head>
-      <Home />
+      <Calendar />
     </>
   );
 };
 
-HomePage.getLayout = (page) => (
+SchedulePage.getLayout = (page) => (
   <AuthGuard>
     <Layout>{page}</Layout>
   </AuthGuard>
 );
 
-export default HomePage;
+export default SchedulePage;

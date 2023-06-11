@@ -1,9 +1,6 @@
 import { Scrollbar } from "@components";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import AssessmentIcon from "@mui/icons-material/Assessment";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import ForumIcon from "@mui/icons-material/Forum";
-import HomeIcon from "@mui/icons-material/Home";
 import type { Theme } from "@mui/material";
 import { Drawer, useMediaQuery } from "@mui/material";
 import { TFunction } from "i18next";
@@ -36,19 +33,9 @@ const getSections = (t: TFunction): Section[] => [
     title: t("general"),
     items: [
       {
-        title: t("home.title"),
-        path: "/",
-        icon: <HomeIcon fontSize="small" />,
-      },
-      {
         title: t("schedule.title"),
-        path: "/schedule",
+        path: "/",
         icon: <CalendarMonthIcon fontSize="small" />,
-      },
-      {
-        title: t("chat.title"),
-        path: "/chat",
-        icon: <ForumIcon fontSize="small" />,
       },
     ],
   },
@@ -59,11 +46,6 @@ const getSections = (t: TFunction): Section[] => [
         title: t("profile.title"),
         path: "/profile",
         icon: <AccountCircleIcon fontSize="small" />,
-      },
-      {
-        title: t("assessments.title"),
-        path: "/assessments",
-        icon: <AssessmentIcon fontSize="small" />,
       },
     ],
   },

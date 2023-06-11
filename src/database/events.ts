@@ -13,8 +13,8 @@ import {
 
 const eventsCollection = collection(db, "events");
 
-export const getEventsByUser = async (resourceId?: string) => {
-  const q = query(eventsCollection, where("resourceId", "==", resourceId));
+export const getEventsByUser = async (userId: string) => {
+  const q = query(eventsCollection, where("userId", "==", userId));
   const data = await getDocs(q);
   return data.docs.map((doc) => doc.data()) ?? [];
 };
