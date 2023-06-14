@@ -12,18 +12,13 @@ import {
   Typography,
 } from "@mui/material";
 import { storage } from "@services";
-import { TUserType } from "@types";
+import { TUserType, typeOptions } from "@types";
 import { formatCpf, getUserAcronym } from "@utils";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import * as Styles from "./ProfileGeneral.styles";
-
-export type TTypeOptions = {
-  label: string;
-  value: TUserType;
-};
 
 export const ProfileGeneral = () => {
   const { t } = useTranslation();
@@ -35,21 +30,6 @@ export const ProfileGeneral = () => {
   const [isLoadingChangeAvatar, setIsLoadingChangeAvatar] = useState(false);
   const [isLoadingSave, setIsLoadingSave] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-
-  const typeOptions: TTypeOptions[] = [
-    {
-      label: "Aluno",
-      value: "aluno",
-    },
-    {
-      label: "Professor",
-      value: "professor",
-    },
-    {
-      label: "Funcionário",
-      value: "funcionario",
-    },
-  ];
 
   const handleChangeAvatar = async (event: any) => {
     const [file] = event.target.files;

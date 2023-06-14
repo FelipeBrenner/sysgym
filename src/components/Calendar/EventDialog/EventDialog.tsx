@@ -6,11 +6,9 @@ import {
   Button,
   Dialog,
   Divider,
-  FormControlLabel,
   FormHelperText,
   Grid,
   IconButton,
-  Switch,
   TextField,
   Typography,
 } from "@mui/material";
@@ -36,7 +34,6 @@ interface Props {
 }
 
 interface FormValues {
-  allDay: boolean;
   color: string;
   description: string;
   end: Date;
@@ -59,7 +56,6 @@ export const EventDialog: FC<Props> = ({
   const initialValues = useMemo((): FormValues => {
     if (event) {
       return {
-        allDay: event.allDay,
         color: event.color ?? "",
         description: event.description,
         end: new Date(event.end),
@@ -71,7 +67,6 @@ export const EventDialog: FC<Props> = ({
 
     if (range) {
       return {
-        allDay: false,
         color: "",
         description: "",
         end: new Date(range.end),
@@ -89,7 +84,6 @@ export const EventDialog: FC<Props> = ({
     end.setHours(end.getHours() + 2);
 
     return {
-      allDay: false,
       color: "",
       description: "",
       end,
@@ -103,7 +97,6 @@ export const EventDialog: FC<Props> = ({
     enableReinitialize: true,
     initialValues,
     validationSchema: Yup.object({
-      allDay: Yup.bool(),
       description: Yup.string().max(5000),
       end: Yup.date(),
       start: Yup.date(),
@@ -112,7 +105,6 @@ export const EventDialog: FC<Props> = ({
     onSubmit: async (values, helpers): Promise<void> => {
       try {
         let data = {
-          allDay: values.allDay,
           description: values.description,
           end: values.end.getTime(),
           start: values.start.getTime(),
@@ -206,7 +198,7 @@ export const EventDialog: FC<Props> = ({
             onChange={formik.handleChange}
             value={formik.values.title}
           />
-          <Box sx={{ mt: 2 }}>
+          <Box sx={{ mt: 3 }}>
             <TextField
               error={Boolean(
                 formik.touched.description && formik.errors.description
@@ -220,18 +212,6 @@ export const EventDialog: FC<Props> = ({
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
               value={formik.values.description}
-            />
-          </Box>
-          <Box sx={{ mt: 2 }}>
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={formik.values.allDay}
-                  name="allDay"
-                  onChange={formik.handleChange}
-                />
-              }
-              label="Dia inteiro"
             />
           </Box>
           <LocalizationProvider

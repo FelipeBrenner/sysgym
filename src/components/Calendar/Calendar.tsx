@@ -162,7 +162,6 @@ export const Calendar = () => {
 
     try {
       await updateEvent(event.id, {
-        allDay: event.allDay,
         start: event.start?.getTime(),
         end: event.end?.getTime(),
       });
@@ -188,7 +187,6 @@ export const Calendar = () => {
         />
         <Styles.FullCalendarWrapper>
           <FullCalendar
-            allDayMaintainDuration
             dayMaxEventRows={3}
             droppable
             editable

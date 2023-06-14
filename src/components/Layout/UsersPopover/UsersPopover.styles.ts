@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Avatar as MuiAvatar,
   List as MuiList,
@@ -32,4 +33,8 @@ export const UserButton = styled(Button)(({ theme }) => ({
 export const Avatar = styled(MuiAvatar)(({ theme }) => ({
   fontSize: `${theme.typography.body2.fontSize} !important`,
   cursor: "pointer",
+}));
+
+export const DetailsBox = styled(Box)(({ theme }) => ({
+  // marginLeft: theme.spacing(1),
 }));

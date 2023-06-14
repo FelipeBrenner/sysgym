@@ -1,6 +1,6 @@
 import { usersDatabase } from "@database";
 import { Popover, Typography } from "@mui/material";
-import { IUser } from "@types";
+import { IUser, typeOptions } from "@types";
 import { getUserAcronym } from "@utils";
 import NextLink from "next/link";
 import { useEffect, useState } from "react";
@@ -61,7 +61,15 @@ export const UsersPopover = ({
                 </Styles.Avatar>
               }
             >
-              {user.name}
+              <Styles.DetailsBox>
+                {user?.name}
+                <Typography color="textSecondary" variant="body2">
+                  {
+                    typeOptions.find((option) => option.value === user.type)
+                      ?.label
+                  }
+                </Typography>
+              </Styles.DetailsBox>
             </Styles.UserButton>
           </Styles.ListItem>
         ))}

@@ -1,6 +1,5 @@
 export interface ICalendarEvent {
   id: string;
-  allDay: boolean;
   color?: string;
   description: string;
   end: number;
