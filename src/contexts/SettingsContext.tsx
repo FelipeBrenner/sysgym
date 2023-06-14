@@ -27,8 +27,8 @@ interface SettingsProviderProps {
 }
 
 const initialSettings: Settings = {
-  theme: "light",
-  language: "en",
+  theme: "dark",
+  language: "br",
 };
 
 export const SettingsContext = createContext<SettingsContextValue>({

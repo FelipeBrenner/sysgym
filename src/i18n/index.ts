@@ -112,7 +112,7 @@ export const resources: Resource = {
 };
 
 i18n.use(initReactI18next).init({
-  fallbackLng: "en",
+  fallbackLng: "br",
   supportedLngs: ["en", "br"],
   resources,
 });
