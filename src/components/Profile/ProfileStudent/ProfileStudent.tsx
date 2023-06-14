@@ -43,8 +43,8 @@ export const ProfileStudent = () => {
         id: user?.id ?? "",
         cpf: user?.cpf ?? "",
         date: enrollment?.date ?? null,
-        plan: enrollment?.plan,
-        observation: enrollment?.observation,
+        plan: enrollment?.plan ?? "",
+        observation: enrollment?.observation ?? "",
       };
 
       setEnrollment(enrollmentFormatted);
